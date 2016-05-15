@@ -17,5 +17,6 @@ get '/res/:no' do |no|
 end
 
 get '/erb/:no' do |no|
-  erb :ptt_style
+  str = "<%= ERB TEST %>"
+  erb str
 end
