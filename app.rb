@@ -20,6 +20,6 @@ get '/erb' do
   begin
     erb :ptt_style  
   rescue Exception => e
-    return e.to_s
+    return e
   end
 end
