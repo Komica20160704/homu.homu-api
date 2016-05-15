@@ -39,19 +39,7 @@
 --
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
-</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><% end %></div>
-
-
-</span><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">nba10346</span><span class="f3 push-content">: 這我一定吉</span><span class="push-ipdatetime"> 05/15 15:16
-</span></div><div class="push"><span class="hl push-tag">推 </span><span class="f3 hl push-userid">davidbear203</span><span class="f3 push-content">: 沒分類會毀滅帳號</span><span class="push-ipdatetime"> 05/15 15:17
-</span></div><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">barbarian72</span><span class="f3 push-content">: 分類啦幹！</span><span class="push-ipdatetime"> 05/15 15:17
-</span></div><div class="push"><span class="hl push-tag">推 </span><span class="f3 hl push-userid">kutkin</span><span class="f3 push-content">: 本來就不是朋友  你誤會了吧</span><span class="push-ipdatetime"> 05/15 15:17
-</span></div><div class="push"><span class="hl push-tag">推 </span><span class="f3 hl push-userid">les5277</span><span class="f3 push-content">: 我知道分開旅行會毀滅愛情</span><span class="push-ipdatetime"> 05/15 15:17
-</span></div><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">cpc21478</span><span class="f3 push-content">: 同4F 本來就不是朋友了 又沒革命情感</span><span class="push-ipdatetime"> 05/15 15:17
-</span></div><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">saiulbb</span><span class="f3 push-content">: 哀 沒辦法</span><span class="push-ipdatetime"> 05/15 15:19
-</span></div><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">xul4m4vu6666</span><span class="f3 push-content">: 我掛名 60吉格就好</span><span class="push-ipdatetime"> 05/15 15:19
-</span></div><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">alien4024</span><span class="f3 push-content">: 我都吸% 然後上台唬爛的</span><span class="push-ipdatetime"> 05/15 15:21
-</span></div></div>
+</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= line.chomp%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><% end %></div>
 
 </body>
 </html>
