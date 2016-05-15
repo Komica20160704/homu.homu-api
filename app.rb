@@ -18,10 +18,10 @@ end
 
 get '/erb' do
   begin
-    erb :ptt_style  
+    erb :ptt 
   rescue Exception => e
-    result = e.message + "\n"
-    result += e.backtrace.join("\n")
+    result = e.message + "<br>"
+    result += e.backtrace.join("<br>")
     return result
   end
 end

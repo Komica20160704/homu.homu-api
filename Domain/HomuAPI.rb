@@ -25,6 +25,6 @@ class HomuAPI
     blocks.each do |block|
       res << parser.Parse(block)
     end
-    return res
+    return res.first
   end
 end

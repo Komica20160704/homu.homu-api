@@ -1,4 +1,5 @@
 <%
+  require './Domain/HomuAPI'
   homu = HomuAPI.new
   res = homu.GetRes '7792143'
   head = res['Head']
@@ -11,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%=head['Title']%> - 看板 Gossiping - 批踢踢實業坊</title>
+    <title><%= head['Title']%> - 看板 Gossiping - 批踢踢實業坊</title>
     <meta name="robots" content="all">
     <meta name="keywords" content="Ptt BBS 批踢踢">
     <meta name="description" content="
