@@ -20,6 +20,8 @@ get '/erb' do
   begin
     erb :ptt_style  
   rescue Exception => e
-    return e
+    result = e.message + "\n"
+    result += e.backtrace.join("\n")
+    return result
   end
 end
