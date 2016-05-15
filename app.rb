@@ -1,12 +1,12 @@
 require 'sinatra'
 require './Domain/HomuAPI'
 
-# get '/'
-#   homu = HomuAPI.new
-#   homu.GetPage 'index'
-# end
+get '/'
+  homu = HomuAPI.new
+  homu.GetPage 'index'
+end
 
-get '/:page' do |page|
+get '/page/:page' do |page|
   homu = HomuAPI.new
   homu.GetPage page
 end
