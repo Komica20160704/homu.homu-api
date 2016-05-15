@@ -1,12 +1,14 @@
 require 'sinatra'
 
-get '/' do
+get '/:page' do |page|
   require './Domain/HomuGetter'
   require './Domain/HomuBlockParser'
 
+  page = 0 if page.nil?
+
   homu = '[ '
   homuGetter = HomuGetter.new
-  homuGetter.DownloadHtml 0
+  homuGetter.DownloadHtml page
   homuGetter.CutHtml
   parser = HomuBlockParser.new homuGetter.Contents
   blocks = homuGetter.Blocks
