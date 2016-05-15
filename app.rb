@@ -3,7 +3,7 @@ require './Domain/HomuAPI'
 
 get '/'
   homu = HomuAPI.new
-  homu.GetPage 0
+  homu.GetPage 'index'
 end
 
 get '/:page' do |page|
@@ -11,7 +11,7 @@ get '/:page' do |page|
   homu.GetPage page
 end
 
-get '/ref/:no' do |no|
+get '/res/:no' do |no|
   homu = HomuAPI.new
   homu.GetRes no
 end
