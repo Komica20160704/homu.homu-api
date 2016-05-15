@@ -1,17 +1,23 @@
+require 'sinatra'
+
+get '/' do
   require './Domain/HomuGetter'
   require './Domain/HomuBlockParser'
 
-  @homu = '[ '
+  homu = '[ '
   homuGetter = HomuGetter.new
   homuGetter.DownloadHtml 0
   homuGetter.CutHtml
   parser = HomuBlockParser.new homuGetter.Contents
   blocks = homuGetter.Blocks
   blocks.each do |block|
-    @homu += parser.Parse block
+    homu += parser.Parse block
     if block == blocks.last
-      @homu += ' ]'
+      homu += ' ]'
     else
-      @homu += ', '
+      homu += ', '
     end
   end
+
+  return homu
+end
