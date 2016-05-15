@@ -37,8 +37,9 @@
 <div id="main-container">
 <div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%=head['Name']%>(<%=head['Id']%>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%=head['Title']%></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%=head['Date']%> <%=head['Time']%></span></div>       
 <%if head['Picture']%><a href="http://homu.komica.org/00/src/<%= head['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture head['Picture']%>"></a><%end%>
-<%= head['Content']%>
 
+<%= head['Content']%>
+<%= test%>
 --
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
