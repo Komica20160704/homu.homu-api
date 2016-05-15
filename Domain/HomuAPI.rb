@@ -12,7 +12,7 @@ class HomuAPI
     blocks.each do |block|
       page << parser.Parse(block)
     end
-    return page.to_json
+    return page
   end
 
   def GetRes res_no
@@ -25,6 +25,6 @@ class HomuAPI
     blocks.each do |block|
       res << parser.Parse(block)
     end
-    return res.to_json
+    return res
   end
 end
