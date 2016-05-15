@@ -17,7 +17,7 @@ get '/res/:no' do |no|
 end
 
 get '/read/:no' do |no|
-  @test_str = 'this is test string'
+  @ref_no = no
   begin
     erb :ptt 
   rescue Exception => e
