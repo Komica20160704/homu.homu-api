@@ -1,4 +1,6 @@
 require 'rack/lobster'
+require './Domain/HomuGetter'
+require './Domain/HomuBlockParser'
 
 map '/health' do
   health = proc do |env|
