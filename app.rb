@@ -16,7 +16,7 @@ get '/res/:no' do |no|
   return (homu.GetRes(no).to_json
 end
 
-get '/erb/:no' do |no|
-  str = "<%= ERB TEST %>"
-  erb str
-end
+# get '/erb/:no' do |no|
+#   str = "<%= ERB TEST %>"
+#   erb str
+# end
