@@ -16,7 +16,7 @@ get '/res/:no' do |no|
   return (homu.GetRes(no)).to_json
 end
 
-get '/erb' do |no|
+get '/erb' do
   begin
     erb :ptt_style  
   rescue Exception => e
