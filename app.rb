@@ -17,5 +17,9 @@ get '/res/:no' do |no|
 end
 
 get '/erb' do |no|
-  erb :ptt_style
+  begin
+    erb :ptt_style  
+  rescue Exception => e
+    return e.to_s
+  end
 end
