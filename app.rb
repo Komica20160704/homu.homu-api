@@ -17,6 +17,6 @@ get '/res/:no' do |no|
 end
 
 get '/erb/:no' do |no|
-  str = "<%= ERB TEST %>"
+  str = "<%= 'ERB TEST' %>"
   erb str
 end
