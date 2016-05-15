@@ -37,11 +37,10 @@
 <%= head['Content']%>
 
 --
-<span class="f2">※ 發信站: KOMICA, NO.<%= head['No']%>
+<span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
-
 <% bodies.each do |body| %>
-</span><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= body['Content']%></span><span class="push-ipdatetime"> <%= body['Date'][-1..-5]%> <%= body['Time'][0..4]%>
+</span><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= body['Content']%></span><span class="push-ipdatetime">No.<%= body['No']%> <%= body['Date'][3..7]%> <%= body['Time'][0..4]%>
 <% end %>
 
 
