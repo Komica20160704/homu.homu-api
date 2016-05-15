@@ -9,7 +9,7 @@ class HomuGetter
   end
 
   def DownloadPage page
-    page = 'index' if page == '0'
+    page = 'index' if page.to_s == '0'
     @html = Nokogiri::HTML(open(@page_url + page.to_s + '.htm').read)
   end
 
