@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'sinatra'
 require './Domain/HomuAPI'
 
@@ -20,6 +21,8 @@ get '/read/:no' do |no|
   @ref_no = no
   begin
     erb :ptt 
+  rescue PageNotFoundException
+    "找不到此討論串"
   rescue Exception => e
     result = e.message + "<br>"
     result += e.backtrace.join("<br>")

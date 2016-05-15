@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'open-uri'
 require 'nokogiri'
+require './Domain/Exception/PageNotFoundException'
 
 class HomuGetter
   def initialize
@@ -24,6 +25,7 @@ class HomuGetter
       n.replace("#{n.text}") if n['color'] == '789922'
     end
     @main_form = @html.xpath("//html//form")[1]
+    raise PageNotFoundException if @main_form.nil?
     make_blocks
     save_contents
   end
