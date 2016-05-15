@@ -4,7 +4,7 @@ require './Domain/HomuGetter'
 require './Domain/HomuBlockParser'
 
 get '/:page' do |page|
-  page = 'index' if page == 0
+  page = 'index' if page == '0'
   homu = '[ '
   homuGetter = HomuGetter.new
   homuGetter.DownloadHtml page
