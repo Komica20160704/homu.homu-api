@@ -2,6 +2,27 @@ require 'rack/lobster'
 require './Domain/HomuGetter'
 require './Domain/HomuBlockParser'
 
+map '/homu' do
+  homu = '[ '
+  homuGetter = HomuGetter.new
+  homuGetter.DownloadHtml 0
+  homuGetter.CutHtml
+  parser = HomuBlockParser.new homuGetter.Contents
+  blocks = homuGetter.Blocks
+  blocks.each do |block|
+    homu += parser.Parse block
+    if block == blocks.last
+      homu += ' ]'
+    else
+      homu += ', '
+    end
+  end
+  get_json = proc do |env|
+    [200, { "Content-Type" => "text/html" }, [homu]]
+  end
+  run get_json
+end
+
 map '/health' do
   health = proc do |env|
     [200, { "Content-Type" => "text/html" }, ["1"]]
