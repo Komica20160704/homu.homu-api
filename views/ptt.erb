@@ -12,23 +12,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= head['Title']%> - 看板 Gossiping - 批踢踢實業坊</title>
+    <title><%= head['Title']%> - 綜合 - KOMICA</title>
     <meta name="robots" content="all">
-    <meta name="keywords" content="Ptt BBS 批踢踢">
-    <meta name="description" content="
-      大學時期一定會有分組報告
-      也製造了不少小圈圈
-      結果最後報告要弄不弄
-      每次弄報告都會吵架
-      ">
-    <meta property="og:site_name" content="Ptt 批踢踢實業坊">
+    <meta name="keywords" content="KOMICA">
+    <meta name="description" content="<%= head['Content']%>">
+    <meta property="og:site_name" content="KOMICA">
     <meta property="og:title" content="<%=head['Title']%>">
-    <meta property="og:description" content="
-      大學時期一定會有分組報告
-      也製造了不少小圈圈
-      結果最後報告要弄不弄
-      每次弄報告都會吵架
-      ">
+    <meta property="og:description" content="<%= head['Content']%>">
     <link rel="canonical" href="https://www.ptt.cc/bbs/Gossiping/M.1463296597.A.5E2.html">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-common.css">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-base.css" media="screen">
@@ -39,16 +29,8 @@
 
 <body>
 <div id="main-container">
-<div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value">firetai (FireKT)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">Gossiping</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%=head['Title']%></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">Sun May 15 15:16:35 2016</span></div>       
-大學時期一定會有分組報告
-也製造了不少小圈圈
-結果最後報告要弄不弄
-每次弄報告都會吵架
-還會翻舊帳
-但分組時候又會基於之前是室友啦朋友
-所以又一組了
-有沒有分組報告毀滅友情的卦呀？
-
+<div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%=head['Name']%>(<%=head['Id']%>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%=head['Title']%></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%=head['Date']%> <%=head['Time']%></span></div>       
+<%= head['Content']%>
 --
 <span class="f2">※ 發信站: 批踢踢實業坊(ptt.cc), 來自: 223.140.55.95
 </span><span class="f2">※ 文章網址: <a href="https://www.ptt.cc/bbs/Gossiping/M.1463296597.A.5E2.html" target="_blank" rel="nofollow">https://www.ptt.cc/bbs/Gossiping/M.1463296597.A.5E2.html</a>
