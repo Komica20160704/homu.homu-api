@@ -39,7 +39,7 @@
 --
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
-<% bodies.each do |body| %><%body['Content'].each_line do |line|%></span><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%><% end %><% end %>
+</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><% end %></div>
 
 
 </span><div class="push"><span class="f1 hl push-tag">→ </span><span class="f3 hl push-userid">nba10346</span><span class="f3 push-content">: 這我一定吉</span><span class="push-ipdatetime"> 05/15 15:16
