@@ -4,18 +4,22 @@ require 'nokogiri'
 
 class HomuGetter
   def initialize
-    @url = 'http://homu.komica.org/00/'
+    @page_url = 'http://homu.komica.org/00/'
+    @res_url = 'http://homu.komica.org/00/index.php?res='
   end
 
-  def DownloadHtml page
-    page = 'index' if page == 0
-    @html = Nokogiri::HTML(open(@url + page.to_s + '.htm').read)
-    @html.search('br').each do |n| n.replace("\n") end
-    @html.search('hr').each do |n| n.replace('<sprate>sprate<\sprate>') end
-    # @html.search('font').each do |n| n.replace("<hiden>\n#{n.text}</hiden>") if n["color"] == '#707070' end
+  def DownloadPage page
+    page = 'index' if page == '0'
+    @html = Nokogiri::HTML(open(@page_url + page.to_s + '.htm').read)
+  end
+
+  def DownloadRes no
+    @html = Nokogiri::HTML(open(@res_url + no.to_s).read)
   end
 
   def CutHtml
+    @html.search('br').each do |n| n.replace("\n") end
+    @html.search('hr').each do |n| n.replace('<sprate>sprate<\sprate>') end
     @main_form = @html.xpath("//html//form")[1]
     make_blocks
     save_contents

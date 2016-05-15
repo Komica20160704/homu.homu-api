@@ -25,7 +25,7 @@ class HomuBlockParser
       end
     end
     block_hash['Bodies'] = bodies
-    return block_hash.to_json
+    return block_hash
   end
 
   private

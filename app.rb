@@ -1,24 +1,17 @@
 require 'sinatra'
+require './Domain/HomuAPI'
 
-require './Domain/HomuGetter'
-require './Domain/HomuBlockParser'
+get '/'
+  homu = HomuAPI.new
+  homu.GetPage 0
+end
 
 get '/:page' do |page|
-  page = 'index' if page == '0'
-  homu = '[ '
-  homuGetter = HomuGetter.new
-  homuGetter.DownloadHtml page
-  homuGetter.CutHtml
-  parser = HomuBlockParser.new homuGetter.Contents
-  blocks = homuGetter.Blocks
-  blocks.each do |block|
-    homu += parser.Parse block
-    if block == blocks.last
-      homu += ' ]'
-    else
-      homu += ', '
-    end
-  end
+  homu = HomuAPI.new
+  homu.GetPage page
+end
 
-  return homu
+get '/ref/:no' do |no|
+  homu = HomuAPI.new
+  homu.GetRes no
 end
