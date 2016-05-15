@@ -1,11 +1,10 @@
 require 'sinatra'
 
+require './Domain/HomuGetter'
+require './Domain/HomuBlockParser'
+
 get '/:page' do |page|
-  require './Domain/HomuGetter'
-  require './Domain/HomuBlockParser'
-
-  page = 0 if page.nil?
-
+  page = 'index' if page == 0
   homu = '[ '
   homuGetter = HomuGetter.new
   homuGetter.DownloadHtml page
