@@ -2,10 +2,20 @@
   require './Domain/HomuAPI'
   homu = HomuAPI.new
   pages = []
+
+  threads = []
+  (@page.to_i..(@page.to_i + 1)).each do |i|
+    threads << Thread.new { pages[i - @page.to_i] = homu.GetPage(i.to_s) }
+  end
+  threads.each do |t|
+    t.join
+  end
+
   # (@page.to_i..(@page.to_i + 1)).each do |i|
   #   pages << homu.GetPage(i.to_s)
   # end
-  pages << homu.GetPage(@page)
+
+  # pages << homu.GetPage(@page)
   heads = []
   pages.each do |page|
     page.each do |block|
