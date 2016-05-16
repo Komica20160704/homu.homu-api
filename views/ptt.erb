@@ -36,11 +36,24 @@
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-custom.css">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/pushstream.css" media="screen">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-print.css" media="print">
+    <script>
+      function goTop() {
+          window.scrollTo(0, 0);
+      }
+      function goBottom() {
+          window.scrollTo(0, document.body.scrollHeight);
+      }
+    </script>
+    <style>
+      .jsbtn:hover {
+        cursor:pointer;
+      }
+    </style>
 </head>
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><a class='f7 hl' href='../'>回到列表</a></div></div>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><a class='f7 hl' href='../'>回到列表</a> <a class='jsbtn' onclick='goBottom()'>到達底端</a> <a class='jsbtn' onclick='goTop()'>回到頂端</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%=head['Name']%>(<%=head['Id']%>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%=head['Title']%></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%=head['Date']%> <%=head['Time']%></span></div>
 <%if head['Picture']%><a href="http://homu.komica.org/00/src/<%= head['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture head['Picture']%>"></a><%end%><span>
 
@@ -50,7 +63,7 @@
 --</span>
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
-</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><% next if line == "\n"%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= body_line line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><%if body['Picture']%><a href="http://homu.komica.org/00/src/<%= body['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div>
+</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><% next if line == "\n"%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= body_line line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><%if body['Picture']%><a href="http://homu.komica.org/00/src/<%= body['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div><div id="jump_to_me">bottom</div>
 
 </body>
 </html>
