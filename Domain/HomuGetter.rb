@@ -21,10 +21,13 @@ class HomuGetter
   def CutHtml
     @html.search('br').each do |n| n.replace("\n") end
     @html.search('hr').each do |n| n.replace('<sprate>sprate<\sprate>') end
-    # @html.search('font').each do |n|
-    #   puts n.text if n['color'] == '789922'
-    #   n.replace("#{n.text}") if n['color'] == '789922'
-    # end
+    @html.search('font').each do |n|
+      if n['color'] == '789922'
+        puts n.text if n['color'] == '789922'
+        n = n.text if n['color'] == '789922'
+        puts n
+      end
+    end
     @main_form = @html.xpath("//html//form")[1]
     raise PageNotFoundException if @main_form.nil?
     make_blocks
