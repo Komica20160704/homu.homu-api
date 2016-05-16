@@ -4,7 +4,6 @@
   res = homu.GetRes @ref_no
   head = res['Head']
   bodies = res['Bodies']
-  head_picture = head['Picture'].split('.')
 
   def small_picture picture
     s = picture.split('.')
@@ -27,13 +26,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= head['Title']%> - 綜合 - KOMICA</title>
-    <meta name="robots" content="all">
     <meta name="keywords" content="KOMICA">
     <meta name="description" content="<%= head['Content']%>">
     <meta property="og:site_name" content="KOMICA">
     <meta property="og:title" content="<%=head['Title']%>">
     <meta property="og:description" content="<%= head['Content']%>">
-    <link rel="canonical" href="https://www.ptt.cc/bbs/Gossiping/M.1463296597.A.5E2.html">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-common.css">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-base.css" media="screen">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-custom.css">

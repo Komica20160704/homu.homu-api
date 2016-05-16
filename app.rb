@@ -4,8 +4,11 @@ require 'json'
 require './Domain/HomuAPI'
 
 get '/' do
-  homu = HomuAPI.new
-  return JSON.pretty_generate(homu.GetPage('index'))
+  @page = params['page']
+  @page = '0' if @page.nil?
+  erb :ptt_index
+  # homu = HomuAPI.new
+  # return JSON.pretty_generate(homu.GetPage('index'))
 end
 
 get '/page/:page' do |page|
@@ -21,7 +24,7 @@ end
 get '/read/:no' do |no|
   @ref_no = no
   begin
-    erb :ptt 
+    erb :ptt
   rescue PageNotFoundException
     "找不到此討論串"
   rescue Exception => e
