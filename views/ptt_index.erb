@@ -2,7 +2,7 @@
   require './Domain/HomuAPI'
   homu = HomuAPI.new
   pages = []
-  # (0..1).each do |i|
+  # (@page.to_i..(@page.to_i + 1)).each do |i|
   #   pages << homu.GetPage(i.to_s)
   # end
   pages << homu.GetPage(@page)
@@ -47,7 +47,7 @@
 
   def get_title dialog
     tag = dialog['Title']
-    content = dialog['Content'].split("\n").first
+    content = dialog['Content'].strip.split("\n").first
     tag = get_n_bytes_string 4, tag if tag.bytes.to_a.size > 4
     content = get_n_bytes_string 64, content if content.bytes.to_a.size > 64
     title = '[' + tag + '] ' + content
