@@ -10,6 +10,14 @@
     s = picture.split('.')
     return s[0] + 's.jpg'
   end
+
+  def body_line line
+    line.chomp!
+    if line[0] == '>'
+      line = '</span><span class=\'f7 push-content\'>' + line
+    end
+    return line
+  end
 %>
 
 <!DOCTYPE html>
@@ -43,7 +51,7 @@
 --
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
 </span><span class="f2">※ 文章網址: <a href="http://homu.komica.org/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://homu.komica.org/00/index.php?res=<%= head['No']%></a>
-</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= line.chomp%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><%if body['Picture']%><a href="http://homu.komica.org/00/src/<%= body['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div>
+</span><% bodies.each do |body| %><%body['Content'].each_line do |line|%><% next if line == "\n"%><div class="push"><span class="hl push-tag">No.<%= body['No']%> </span><span class="f3 hl push-userid"><%= body['Id']%></span><span class="f3 push-content">: <%= body_line line%></span><span class="push-ipdatetime"><%= body['Date'][3..7]%> <%= body['Time'][0..4]%></span></div><% end %><%if body['Picture']%><a href="http://homu.komica.org/00/src/<%= body['Picture']%>" target="_blank"><img src="http://homu.komica.org/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div>
 
 </body>
 </html>
