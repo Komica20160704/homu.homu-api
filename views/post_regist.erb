@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <form action="index.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="mode" value="regist">
+        <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
+        <table border="0" cellpadding="1" cellspacing="1">
+            <tbody>
+                <tr class="hide">
+                    <td bgcolor="#eeaa88"><b>名　　稱</b></td>
+                    <td>
+                        <input type="hidden" name="name" size="28">
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#eeaa88"><b>E-mail</b></td>
+                    <td>
+                        <input type="text" name="email" size="28">&nbsp;
+                        <input type="submit" value="送　出">
+                    </td>
+                </tr>
+                <tr class="hide">
+                    <td bgcolor="#eeaa88"><b>題　　名</b></td>
+                    <td>
+                        <input name="sub" size="35">
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#eeaa88"><b>內　　文</b></td>
+                    <td>
+                        <textarea name="comx5113" cols="48" rows="4" wrap="soft"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#eeaa88"><b>附加圖檔</b></td>
+                    <td>
+                        <input type="file" name="upfile" size="35">&nbsp;[
+                        <label>
+                            <input type="checkbox" name="textonly" value="on">無貼圖</label>]</td>
+                </tr>
+                <tr>
+                    <td bgcolor="#eeaa88"><b>刪除密碼</b></td>
+                    <td>
+                        <input type="password" name="pwd" size="8" maxlength="8" value=""><small>(刪除文章用。英數字8字元以內)</small></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#eeaa88"><b>畫像認證</b></td>
+                    <td align="left" height="90">
+                        <div class="g-recaptcha" data-sitekey="6LeuBPkSAAAAAJKaNezSYDM3ZL4-jfSJu9cWpp_-">
+                            <div>
+                                <div style="width: 304px; height: 78px;">
+                                    <iframe src="https://www.google.com/recaptcha/api2/anchor?k=6LeuBPkSAAAAAJKaNezSYDM3ZL4-jfSJu9cWpp_-&amp;co=aHR0cDovL2hvbXUua29taWNhLm9yZzo4MA..&amp;hl=zh-TW&amp;v=r20160502112552&amp;size=normal&amp;cb=wca8feb1ra6s" title="reCAPTCHA 小工具" width="304" height="78" role="presentation" frameborder="0" scrolling="no" name="undefined"></iframe>
+                                </div>
+                                <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

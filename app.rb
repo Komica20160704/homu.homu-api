@@ -33,3 +33,7 @@ get '/read/:no' do |no|
     return result
   end
 end
+
+get '/regist' do
+  erb :post_regist
+end
