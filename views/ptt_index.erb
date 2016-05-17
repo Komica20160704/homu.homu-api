@@ -16,6 +16,7 @@
   # end
 
   # pages << homu.GetPage(@page)
+  
   heads = []
   pages.each do |page|
     page.each do |block|
@@ -59,7 +60,7 @@
     tag = dialog['Title']
     content = dialog['Content'].strip.split("\n").first
     tag = get_n_bytes_string 4, tag if tag.bytes.to_a.size > 4
-    content = get_n_bytes_string 64, content if content.bytes.to_a.size > 64
+    content = get_n_bytes_string 48, content if content.bytes.to_a.size > 48
     title = '[' + tag + '] ' + content
     return "<a href='read/#{dialog['No']}'>" + title + "</a>"
   end
@@ -83,7 +84,7 @@
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'>綜合 - 討論串列表 - KOMICA</span></div></div>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'>KOMICA - 討論串列表 - 綜合</span></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><span class='f0 b7'>   編號    日 期 作  者   文  章  標  題                                                            </span>
 <% heads.each do |head| %><span><%= head['No']%> <%= get_puch_count head['Hidenbodycount']%> <%= head['Date'][3..7]%> <%= head['Id']%> <%= get_title head%></span>
 <% end %><span>
