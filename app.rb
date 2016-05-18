@@ -39,15 +39,6 @@ get '/post_form' do
 end
 
 get '/poster' do
+  @no = params['no']
   erb :poster
-end
-
-post '/verify' do
-  @content = params['comx5113']
-  @grr = params['g-recaptcha-response']
-  erb :poster
-end
-
-post '/test' do
- "params.to_s: #{params.to_s}"
 end
