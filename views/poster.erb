@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>發表文章 - 綜合 - KOMICA</title>
+    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-common.css">
+    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-base.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-custom.css">
+    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/pushstream.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-print.css" media="print">
+
+    <style type="text/css">
+    iframe {
+        width:100%;
+        height: 900px;
+        border: none;
+        margin: 0px auto;
+    }
+    </style>
+</head>
+
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='http://web.komica.org/' target='_blank'>KOMICA</a> - <a href='http://homu.komica.org/00/index.htm' target="_blank">綜合</a> - <a href='./'>討論串列表</a> - 發表文章</span></div></div>
+<div style="width:100%;">
+<div style="width:100%; margin: 0px auto;">
+<iframe id='myframe' name='myframe' src='./post_form'></iframe>
+</div>
+</div>
+
+    <script type="text/javascript">
+        var myFrame = document.getElementsByName('myframe')[0];
+
+        function handleResponseReceived() {
+            try { myFrame.contentDocument; }
+            catch (err) { window.location = './'; }
+        }
+
+        if (myFrame.addEventListener) {
+            myFrame.addEventListener('load', handleResponseReceived, false);
+            console.log('if (myFrame.addEventListener)');
+        } else if (myFrame.attachEvent) {
+            myFrame.attachEvent('onload', handleResponseReceived);
+            console.log('else if (myFrame.attachEvent)');
+        } else {
+            myFrame['onload'] = 'handleResponseReceived';
+            console.log('else');
+        }
+    </script>
+
+</html>

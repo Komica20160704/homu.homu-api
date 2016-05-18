@@ -72,8 +72,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>綜合 - 討論串列表 - KOMICA</title>
-    <meta name="keywords" content="KOMICA">
+    <title>討論串列表 - 綜合 - KOMICA</title>
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-common.css">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-base.css" media="screen">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/v2.17/bbs-custom.css">
@@ -84,10 +83,12 @@
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'>KOMICA - 討論串列表 - 綜合</span></div></div>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='http://web.komica.org/' target='_blank'>KOMICA</a> - <a href='http://homu.komica.org/00/index.htm' target="_blank">綜合</a> - 討論串列表</span>  <a href='./poster' class='f7 hl'>[我要發文]</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><span class='f0 b7'>   編號    日 期 作  者   文  章  標  題                                                            </span>
 <% heads.each do |head| %><span><%= head['No']%> <%= get_puch_count head['Hidenbodycount']%> <%= head['Date'][3..7]%> <%= head['Id']%> <%= get_title head%></span>
 <% end %><span>
 </span><span class='f0 hl'><% if @page == '0' %>最前頁<% else %><a href='./?page=<%=@page.to_i - 1%>'>上一頁</a><% end %> <% (0..9).each do |i| %><% if @page == i.to_s %>[<%=i%>]<% else %><a href='./?page=<%=i%>'>[<%=i%>]</a><% end %><% end %> <% if @page == '9' %>最後頁<% else %><a href='./?page=<%=@page.to_i + 1%>'>下一頁</a><% end %></span>
+</div>
+</div>
 </body>
 </html>

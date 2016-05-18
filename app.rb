@@ -7,18 +7,14 @@ get '/' do
   @page = params['page']
   @page = '0' if @page.nil?
   erb :ptt_index
-  # homu = HomuAPI.new
-  # return JSON.pretty_generate(homu.GetPage('index'))
 end
 
 get '/page/:page' do |page|
-  homu = HomuAPI.new
-  return JSON.pretty_generate(homu.GetPage(page))
+  return JSON.pretty_generate(HomuAPI.new.GetPage(page))
 end
 
 get '/res/:no' do |no|
-  homu = HomuAPI.new
-  return JSON.pretty_generate(homu.GetRes(no))
+  return JSON.pretty_generate(HomuAPI.new.GetRes(no))
 end
 
 get '/read/:no' do |no|
@@ -34,6 +30,24 @@ get '/read/:no' do |no|
   end
 end
 
-get '/regist' do
-  erb :post_regist
+get '/post_wait' do
+  erb :post_wait
+end
+
+get '/post_form' do
+  erb :post_form
+end
+
+get '/poster' do
+  erb :poster
+end
+
+post '/verify' do
+  @content = params['comx5113']
+  @grr = params['g-recaptcha-response']
+  erb :poster
+end
+
+post '/test' do
+ "params.to_s: #{params.to_s}"
 end

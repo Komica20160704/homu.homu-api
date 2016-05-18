@@ -1,30 +1,37 @@
 require './Domain/HomuGetter'
+require './Domain/HomuPoster'
 require './Domain/HomuBlockParser'
 
 class HomuAPI
   def GetPage page_number
-    page = []
     homuGetter = HomuGetter.new
     homuGetter.DownloadPage page_number
-    homuGetter.CutHtml
-    parser = HomuBlockParser.new homuGetter.Contents
-    blocks = homuGetter.Blocks
-    blocks.each do |block|
-      page << parser.Parse(block)
-    end
+    page = do_parse homuGetter
     return page
   end
 
   def GetRes res_no
-    res = []
     homuGetter = HomuGetter.new
     homuGetter.DownloadRes res_no
+    res = do_parse homuGetter
+    return res.first
+  end
+
+  def PostNew params
+    poster = HomuPoster.new
+    poster.PostNew params
+  end
+
+  private
+
+  def do_parse homuGetter
+    result = []
     homuGetter.CutHtml
     parser = HomuBlockParser.new homuGetter.Contents
     blocks = homuGetter.Blocks
     blocks.each do |block|
-      res << parser.Parse(block)
+      result << parser.Parse(block)
     end
-    return res.first
+    return result
   end
 end
