@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Chat Room</title>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript">
+    function sendMessage() {
+      $.ajax({
+        method: "POST",
+        url: "send",
+        data: { userId: "<%= @userId %>", message: message.value }
+      })
+      .done(function( msg ) {
+
+      });
+    }
+    function receiveMessage() {
+      $.ajax({
+        method: "POST",
+        url: "receive",
+        data: { userId: "<%= @userId %>" }
+      })
+      .done(function( msg ) {
+        var messageLines = JSON.parse(msg);
+        $.each(messageLines, function(index, value) {
+          document.getElementById("messageLines").innerHTML += value + '<br>';
+        });
+      });
+    }
+
+    setInterval(onTimerTick, 33);
+    function onTimerTick() {
+      receiveMessage();
+    }
+  </script>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="message"><button onclick="sendMessage()">Send</button>
+  </div>
+  <span id="messageLines">
+  </span>
+</body>
+
+</html>
