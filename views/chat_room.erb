@@ -34,15 +34,13 @@
     var sending = false;
     var receiving = false;
     var act = 0;
-    setInterval(onTimerTick, 33);
+    setInterval(onTimerTick, 1000);
     function onTimerTick() {
       if (receiving || sending) {
         return;
       }
       receiving = true;
-      console.log("start receive message");
       receiveMessage();
-      console.log("end receive message");
       receiving = false;
     }
   </script>
