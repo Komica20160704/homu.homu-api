@@ -7,13 +7,15 @@
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript">
     function sendMessage() {
+      while (receiving);
+      sending = true;
       $.ajax({
         method: "POST",
         url: "send",
         data: { userId: "<%= @userId %>", message: message.value }
       })
       .done(function( msg ) {
-
+        sending = false;
       });
     }
     function receiveMessage() {
@@ -29,10 +31,17 @@
         });
       });
     }
-
+    var sending = false;
+    var receiving = false;
+    var act = 0;
     setInterval(onTimerTick, 33);
     function onTimerTick() {
+      if (receiving || sending) {
+        return;
+      }
+      receiving = true;
       receiveMessage();
+      receiving = false;
     }
   </script>
 </head>
