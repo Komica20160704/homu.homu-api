@@ -67,5 +67,11 @@ end
 
 post '/chat/receive' do
   userId = params[:userId]
-  @@chatRoom.ReceiveMessage(userId).to_json
+  begin
+    @@chatRoom.ReceiveMessage(userId).to_json
+  rescue Exception => e
+    msg = e.message
+    msg += e.backtrace
+    return msg
+  end
 end
