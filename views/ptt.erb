@@ -1,7 +1,6 @@
 <%
   require './Domain/HomuAPI'
-  homu = HomuAPI.new
-  res = homu.GetRes @ref_no
+  res = HomuAPI.GetRes @ref_no
   head = res['Head']
   bodies = res['Bodies']
 

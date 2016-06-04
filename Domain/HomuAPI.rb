@@ -3,28 +3,27 @@ require './Domain/HomuPoster'
 require './Domain/HomuBlockParser'
 
 class HomuAPI
-  def GetPage page_number
+  def self.GetPage page_number, opts = {}
     homuGetter = HomuGetter.new
+    homuGetter.isGetfromArchive = opts[:archive] unless opts[:archive].nil?
+    homuGetter.board = opts[:board] unless opts[:board].nil?
     homuGetter.DownloadPage page_number
     page = do_parse homuGetter
     return page
   end
 
-  def GetRes res_no
+  def self.GetRes res_no, opts = {}
     homuGetter = HomuGetter.new
+    homuGetter.isGetfromArchive = opts[:archive] unless opts[:archive].nil?
+    homuGetter.board = opts[:board] unless opts[:board].nil?
     homuGetter.DownloadRes res_no
     res = do_parse homuGetter
     return res.first
   end
 
-  def PostNew params
-    poster = HomuPoster.new
-    poster.PostNew params
-  end
-
   private
 
-  def do_parse homuGetter
+  def self.do_parse homuGetter, opts = {}
     result = []
     homuGetter.CutHtml
     parser = HomuBlockParser.new homuGetter.Contents

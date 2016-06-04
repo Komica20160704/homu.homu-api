@@ -1,21 +1,22 @@
 <%
   require './Domain/HomuAPI'
-  homu = HomuAPI.new
-  pages = []
 
+  pages = []
   threads = []
   (@page.to_i..(@page.to_i + 1)).each do |i|
-    threads << Thread.new { pages[i - @page.to_i] = homu.GetPage(i.to_s) }
+    threads << Thread.new { 
+      pages[i - @page.to_i] = HomuAPI.GetPage(i.to_s, { :board => @board, :archive => params['archive']})
+    }
   end
   threads.each do |t|
     t.join
   end
 
   # (@page.to_i..(@page.to_i + 1)).each do |i|
-  #   pages << homu.GetPage(i.to_s)
+  #   pages << HomuAPI.GetPage(i.to_s)
   # end
 
-  # pages << homu.GetPage(@page)
+  # pages << HomuAPI.GetPage(@page)
 
   heads = []
   pages.each do |page|

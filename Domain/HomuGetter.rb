@@ -4,18 +4,27 @@ require 'nokogiri'
 require './Domain/Exception/PageNotFoundException'
 
 class HomuGetter
+  attr_writer :isGetfromArchive
+  attr_writer :board
+
   def initialize
-    @page_url = 'http://homu.komica.org/00/'
-    @res_url = 'http://homu.komica.org/00/index.php?res='
+    @page_url = 'http://homu.komica.org/'
+    @archive_url = 'http://archive.komica.org/'
+    @res_url = '/index.php?res='
+    @board = '00'
+    @isGetfromArchive = false
   end
 
   def DownloadPage page
     page = 'index' if page == '0'
-    @html = Nokogiri::HTML(open(@page_url + page.to_s + '.htm').read)
+    url = @isGetfromArchive ? @archive_url : @page_url
+    puts 'DownloadPage: ' + url + @board + '/' + page.to_s + '.htm'
+    @html = Nokogiri::HTML(open(url + @board + '/' + page.to_s + '.htm').read)
   end
 
   def DownloadRes no
-    @html = Nokogiri::HTML(open(@res_url + no.to_s).read)
+    url = @isGetfromArchive ? @archive_url : @page_url
+    @html = Nokogiri::HTML(open(url + @board + @res_url + no.to_s).read)
   end
 
   def CutHtml

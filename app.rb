@@ -10,11 +10,11 @@ get '/' do
 end
 
 get '/page/:page' do |page|
-  return JSON.pretty_generate(HomuAPI.new.GetPage(page))
+  return JSON.pretty_generate(HomuAPI.GetPage(page))
 end
 
 get '/res/:no' do |no|
-  return JSON.pretty_generate(HomuAPI.new.GetRes(no))
+  return JSON.pretty_generate(HomuAPI.GetRes(no))
 end
 
 get '/read/:no' do |no|
@@ -30,15 +30,22 @@ get '/read/:no' do |no|
   end
 end
 
-get '/post_wait' do
-  erb :post_wait
+get '/read_comic/:no' do |no|
+  @ref_no = no
+  begin
+    erb :comic
+  rescue PageNotFoundException
+    "找不到此討論串"
+  rescue Exception => e
+    result = e.message + "<br>"
+    result += e.backtrace.join("<br>")
+    return result
+  end
 end
 
-get '/post_form' do
-  erb :post_form
-end
-
-get '/poster' do
-  @no = params['no']
-  erb :poster
+get '/:board/' do |board|
+  @page = params['page']
+  @board = board
+  @page = '0' if @page.nil?
+  erb :ptt_index
 end
