@@ -87,7 +87,7 @@ post '/chat/send' do
   message = params[:message]
   sender = @@chatRoom.FindUser(userId)
   connections.each do |out|
-    out << << "data: #{sender.Name}: #{message}\n\n"
+    out << "data: #{sender.Name}: #{message}\n\n"
   end
   # @@chatRoom.SendMessage(userId, message)
   204 # response without entity body
