@@ -60,6 +60,7 @@ end
 
 require './Domain/ChatRoom/ChatRoom'
 set :server, :thin
+connections = []
 @@chatRoom = ChatRoom::ChatRoom.new
 
 get '/chat' do
@@ -69,7 +70,8 @@ end
 
 get '/chat/subject/:userId', :provides => 'text/event-stream' do |userId|
   stream :keep_open do |out|
-    @@chatRoom.Welcome userId, out
+    connections << out
+    # @@chatRoom.Welcome userId, out
   end
 end
 
@@ -83,7 +85,11 @@ end
 post '/chat/send' do
   userId = params[:userId]
   message = params[:message]
-  @@chatRoom.SendMessage(userId, message)
+  sender = @@chatRoom.FindUser(userId)
+  connections.each do |out|
+    out << << "data: #{sender.Name}: #{message}\n\n"
+  end
+  # @@chatRoom.SendMessage(userId, message)
   204 # response without entity body
 end
 
