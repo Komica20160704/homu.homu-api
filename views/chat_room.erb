@@ -27,6 +27,7 @@
 <script type="text/javascript">
   var es = new EventSource('/chat/subject/<%= @userId %>');
   es.onmessage = function(e) {
+    console.log(e.data);
     document.getElementById("messageLines").innerHTML += e.data + '<br>';
   };
 </script>
