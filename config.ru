@@ -1,4 +1,5 @@
 map('/') do
-  require './app'
+  require './chat'
   run Sinatra::Application
 end
+
