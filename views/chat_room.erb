@@ -7,42 +7,12 @@
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript">
     function sendMessage() {
-
-      sending = true;
       $.ajax({
         method: "POST",
         url: "send",
         data: { userId: "<%= @userId %>", message: message.value }
-      })
-      .done(function( msg ) {
-        sending = false;
       });
-    }
-    function receiveMessage() {
-      $.ajax({
-        method: "POST",
-        url: "receive",
-        data: { userId: "<%= @userId %>" }
-      })
-      .done(function( msg ) {
-        var messageLines = JSON.parse(msg);
-        $.each(messageLines, function(index, value) {
-          document.getElementById("messageLines").innerHTML += value + '<br>';
-        });
-      });
-    }
-    var sending = false;
-    var receiving = false;
-    var act = 0;
-    setInterval(onTimerTick, 1000);
-    function onTimerTick() {
-      if (receiving || sending) {
-        return;
-      }
-      receiving = true;
-      receiveMessage();
-      receiving = false;
-    }
+    };
   </script>
 </head>
 
@@ -53,5 +23,13 @@
   <span id="messageLines">
   </span>
 </body>
+
+<script type="text/javascript">
+  var es = new EventSource('/chat/subject/<%= @userId %>');
+  es.onmessage = function(e) {
+    console.log("msg:" + e.data);
+    document.getElementById("messageLines").innerHTML += e.data + '<br>';
+  };
+</script>
 
 </html>

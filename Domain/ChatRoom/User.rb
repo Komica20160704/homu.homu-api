@@ -3,7 +3,7 @@ module ChatRoom
   class User
     def initialize id, name
       @id, @name = id, name
-      @receiveMessageCount = 0
+      @connection = nil
     end
 
     def Id
@@ -14,12 +14,12 @@ module ChatRoom
       @name
     end
 
-    def ReceiveMessageCount
-      @receiveMessageCount
+    def Connection
+      @connection
     end
 
-    def ReceiveMessageCount= value
-      @receiveMessageCount = value
+    def Connection= value
+      @connection = value
     end
   end
 end

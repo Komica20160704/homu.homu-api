@@ -15,26 +15,40 @@ module ChatRoom
       return user
     end
 
-    def SendMessage userId, message
-      user = @userList.find { |user| user.Id == userId }
-      @messageLineList << "#{user.Name}: #{message}"
+    def FindUser id
+      return @userList.find { |user| user.Id == id }
     end
 
-    def ReceiveMessage userId
-      user = @userList.find { |user| user.Id == userId }
-      messageLineCount = @messageLineList.count
-      receiveMessageCount = user.ReceiveMessageCount
-      user.ReceiveMessageCount = messageLineCount
-      return @messageLineList[receiveMessageCount...messageLineCount]
+    def Welcome id, connection
+      user = @@chatRoom.FindUser(id)
+      unless user.nil?
+        old_connection = user.Connection
+        user.Connection = connection
+        connection.callback do Farewell(user, connection.object_id) end
+        unless old_connection.nil?
+          old_connection << "data: You are login from other browser.\n\n"
+        else
+          SendMessage(id, "Hello!")
+        end
+      end
+    end
+
+    def Farewell user, connection_id
+      SendMessage(user.Id, "Bye!") if user.Connection.object_id == connection_id
+    end
+
+    def SendMessage senderId, message
+      sender = FindUser senderId
+      return if sender.nil?
+      @userList.each do |user|
+        next if user.Connection.nil?
+        user.Connection << "data: #{sender.Name}: #{message}\n\n"
+      end
     end
 
     # Property
     def UserList
       return @userList
-    end
-
-    def MessageLineList
-      return @messageLineList
     end
 
     # Getter & Setter
