@@ -5,7 +5,6 @@ require 'open-uri'
 require './Domain/HomuAPI'
 
 get '/' do
-  puts request.user_agent
   @page = params['page']
   @page = '0' if @page.nil?
   erb :ptt_index
