@@ -24,18 +24,24 @@ module ChatRoom
       unless user.nil?
         old_connection = user.Connection
         user.Connection = connection
-        connection.callback do Farewell(user, connection.object_id) end
+        # connection.callback do
+        #   Farewell(user, connection.get_peername)
+        # end
         unless old_connection.nil?
-          old_connection << "data: You are login from other browser.\n\n"
+          # unless old_connection.get_peername == connection.get_peername
+          #   old_connection << "data: You are login from other browser.\n\n"
+          # end
         else
           SendMessage(id, "Hello!")
         end
       end
     end
 
-    def Farewell user, connection_id
-      SendMessage(user.Id, "Bye!") if user.Connection.object_id == connection_id
-    end
+    # def Farewell user, peername
+    #   connection = user.Connection
+    #   return if connection.get_peername == peername
+    #   SendMessage(user.Id, "Bye!")
+    # end
 
     def SendMessage senderId, message
       sender = FindUser senderId
