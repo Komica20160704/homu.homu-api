@@ -68,10 +68,15 @@ get '/chat' do
 end
 
 get '/chat/subject/:userId', :provides => 'text/event-stream' do |userId|
+  puts "-------------------------------------"
+  puts "connections.size: #{connections.size}"
   stream :keep_open do |out|
+    puts "out.object_id: #{out.object_id}"
     connections << out
     # @@chatRoom.Welcome userId, out
   end
+  puts "connections.size: #{connections.size}"
+  puts "-------------------------------------"
 end
 
 get '/chat/:userId' do |userId|
@@ -85,9 +90,12 @@ post '/chat/send' do
   userId = params[:userId]
   message = params[:message]
   sender = @@chatRoom.FindUser(userId)
+  puts "/////////////////////////////////////"
   connections.each do |out|
+    puts "out.object_id: #{out.object_id}"
     out << "data: #{sender.Name}: #{message}\n\n"
   end
+  puts "/////////////////////////////////////"
   # @@chatRoom.SendMessage(userId, message)
   204 # response without entity body
 end
