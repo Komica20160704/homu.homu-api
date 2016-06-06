@@ -103,18 +103,23 @@
   </div>
   <hr>
   <div id="dialog" class="dialog" style="">
-    <font id="dialog_title" color="#cc1105" size="+1"><b>無題</b></font> 
-    <font id="dialog_name" color="#117743"><b>無名</b></font> 
-    <font id="dialog_data">16/06/06(一)22:23:49 ID:Sj1AZsYw No.7881889</font>
-    <blockquote id="dialog_content">感覺很像在下體打噴嚏一樣</blockquote>
+    <font id="dialog_title" color="#cc1105" size="+1"><b></b></font> 
+    <font id="dialog_name" color="#117743"><b></b></font> 
+    <font id="dialog_data"></font>
+    <blockquote id="dialog_content"></blockquote>
   </div>
 </body>
 
 <script type="text/javascript">
   $("#page_img").load( function() {
+    $("#page_img").css("width", "");
     var w = $(this).width();
     var h = $(this).height();
     var t = $(head_bar).height();
+    if (w > window.screen.width) {
+      w = Math.ceil(window.screen.width * 0.9);
+      $("#page_img").css("width", w + "px");
+    }
     $("#page_container").css("width", w + "px");
     $("#page_btn_l").css("height", h + "px");
     $("#page_btn_r").css("height", h + "px");
