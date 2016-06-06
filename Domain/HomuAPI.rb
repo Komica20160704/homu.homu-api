@@ -17,7 +17,7 @@ class HomuAPI
     homuGetter.isGetfromArchive = opts[:archive] unless opts[:archive].nil?
     homuGetter.board = opts[:board] unless opts[:board].nil?
     homuGetter.DownloadRes res_no
-    res = do_parse homuGetter
+    res = do_parse homuGetter, opts
     return res.first
   end
 
@@ -26,7 +26,7 @@ class HomuAPI
   def self.do_parse homuGetter, opts = {}
     result = []
     homuGetter.CutHtml
-    parser = HomuBlockParser.new homuGetter.Contents
+    parser = HomuBlockParser.new homuGetter.Contents, !opts[:archive].nil?
     blocks = homuGetter.Blocks
     blocks.each do |block|
       result << parser.Parse(block)

@@ -21,7 +21,9 @@ end
 
 get '/res/:no' do |no|
   begin
-    return JSON.pretty_generate(HomuAPI.GetRes(no))
+    res = HomuAPI.GetRes(no, :archive => params['archive'])
+    puts res
+    return JSON.pretty_generate(res)
   rescue PageNotFoundException
     status 404
     return { :message => "找不到此討論串" }.to_json

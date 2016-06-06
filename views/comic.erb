@@ -1,18 +1,126 @@
+<%
+  require './Domain/HomuAPI'
+  res = HomuAPI.GetRes @ref_no, :archive => params['archive']
+  url = params['archive'].nil? ? 'http://homu.komica.org/00/src/' : 'http://archive.komica.org/00/src/'
+%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
-  <title>Read</title>
+  <title>Read Comic - 綜合 - Komica</title>
+  <style>
+    html {
+      width: 99%;
+    }
+    body {
+      width: 100%;
+      background-color: rgb(255, 255, 238);
+      color: rgb(128, 0, 0);
+    }
+    .dialog {
+      margin:auto;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      display: inline-block;
+      background-color: rgb(240, 224, 214);
+    }
+  </style>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript">
+    var res = <%= res.to_json %>;
+    var img_url = "<%= url %>";
+    var index = -1;
+    var weekday = [ "日", "一", "二", "三", "四", "五", "六" ]
 
+    function LoadImg(block) {
+      if (block.Picture) {
+        LoadPage(GetImgURL(block.Picture));
+      } else {
+        LoadPage("../no_pic.jpg");
+      };
+    }
+
+    function LoadDialog(block) {
+      $("#dialog").css("width", "");
+      $("#dialog").css("display", "inline-block");
+      var then = new Date("20" + block.Date);
+      var theday = then.getDay();
+      dialog_title.innerText = block.Title
+      dialog_name.innerText = block.Name
+      var data = block.Date + "(" + weekday[theday] + ")" + block.Time + " ID:" + block.Id + " No." + block.No;
+      dialog_data.innerText = data
+      dialog_content.innerText = block.Content
+      $("#dialog").css("width", (dialog.clientWidth - 19) + "px");
+      $("#dialog").css("display", "block");
+    }
+
+    function GetImgURL(pic) {
+      return img_url + pic;
+    }
+
+    function LoadPage(img) {
+      $("#page_img")[0].src = img;
+    }
+
+    function PrePage() {
+      if (index > -1) {
+        index--;
+        if (index == -1) {
+          LoadImg(res.Head);
+          LoadDialog(res.Head);
+        } else {
+          LoadImg(res.Bodies[index]);
+          LoadDialog(res.Bodies[index]);
+        }
+      };
+    }
+
+    function NextPage() {
+      if (index < res.Bodies.length - 1) {
+        index++;
+        LoadImg(res.Bodies[index]);
+        LoadDialog(res.Bodies[index]);
+      }
+    }
   </script>
 </head>
 
 <body>
-
+  <p id="head_bar" align="center">
+    <font size="5"><b><span>綜合</span></b></font>
+  </p>
+  <hr width="90%" size="1">
+  <div style="width:100%;">
+    <div id="page_btn_l" style="width:50%;height:100%;position:fixed;left:50%;" onclick="NextPage();"></div>
+    <div id="page_btn_r" style="width:50%;height:100%;position:fixed;" onclick="PrePage();"></div>
+    <div id="page_container" style="margin:auto;">
+      <img id="page_img" alt="No Picture!">
+    </div>
+  </div>
+  <hr>
+  <div id="dialog" class="dialog" style="">
+    <font id="dialog_title" color="#cc1105" size="+1"><b>無題</b></font> 
+    <font id="dialog_name" color="#117743"><b>無名</b></font> 
+    <font id="dialog_data">16/06/06(一)22:23:49 ID:Sj1AZsYw No.7881889</font>
+    <blockquote id="dialog_content">感覺很像在下體打噴嚏一樣</blockquote>
+  </div>
 </body>
 
+<script type="text/javascript">
+  $("#page_img").load( function() {
+    var w = $(this).width();
+    var h = $(this).height();
+    var t = $(head_bar).height();
+    $("#page_container").css("width", w + "px");
+    $("#page_btn_l").css("height", h + "px");
+    $("#page_btn_r").css("height", h + "px");
+  });
+  LoadImg(res.Head);
+  LoadDialog(res.Head);
+</script>
 
 </html>

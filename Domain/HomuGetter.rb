@@ -24,6 +24,7 @@ class HomuGetter
 
   def DownloadRes no
     url = @isGetfromArchive ? @archive_url : @page_url
+    puts 'DownloadRes: ' + url + @board + @res_url + no.to_s
     @html = Nokogiri::HTML(open(url + @board + @res_url + no.to_s).read)
   end
 
@@ -31,7 +32,7 @@ class HomuGetter
     @html.search('br').each do |n| n.replace("\n") end
     @html.search('hr').each do |n| n.replace('<sprate>sprate<\sprate>') end
     @html.search('font').each do |n| n = n.text if n['color'] == '789922' end
-    @main_form = @html.xpath("//html//form")[1]
+    @main_form = @isGetfromArchive ? @html.xpath("//html//body//div")[1] : @html.xpath("//html//form")[1]
     raise PageNotFoundException if @main_form.nil?
     make_blocks
     save_contents
@@ -54,7 +55,7 @@ class HomuGetter
     end
     @blocks = []
     @blocks << make_block(children) until children.size == 0
-    @blocks.pop
+    @blocks.pop unless @isGetfromArchive
   end
 
   def make_block children
