@@ -20,9 +20,6 @@ class HomuBlockParser
     block = block.text
     dialogs = block.split '…'
     dialogs.each do |dialog|
-      puts "///////////////"
-      puts dialog
-      File.write './temp.txt', dialog
       detail = do_match dialog
       if block_hash['Head'].nil?
         block_hash['Head'] = detail.to_hash
