@@ -43,7 +43,6 @@ class HomuBlockParser
 
   def match_detail dialog
     format = @isGetfromArchive ? @detail_format_a : @detail_format
-    puts "format: #{format}"
     matched = dialog.match format
     dialog.sub! matched[0], ''
     return Detail.new matched

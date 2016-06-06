@@ -116,7 +116,7 @@
     var w = $(this).width();
     var h = $(this).height();
     var t = $(head_bar).height();
-    if (w > window.screen.width) {
+    if (w > Math.ceil(window.screen.width * 0.9)) {
       w = Math.ceil(window.screen.width * 0.9);
       $("#page_img").css("width", w + "px");
     }
