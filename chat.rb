@@ -1,61 +1,29 @@
-#!/usr/bin/env ruby -I ../lib -I lib
-# coding: utf-8
 require 'sinatra'
-set :server, 'thin'
-connections = []
+require './Domain/ChatRoom/ChatRoom'
 
-get '/' do
-  halt erb(:login) unless params[:user]
-  erb :chat, :locals => { :user => params[:user].gsub(/\W/, '') }
+set :server, :thin
+@@chatRoom = ChatRoom::ChatRoom.new
+
+get '/chat' do
+  user = @@chatRoom.NewUser
+  redirect "/chat/#{user.Id}"
 end
 
-get '/stream', :provides => 'text/event-stream' do
+get '/chat/subject/:userId', :provides => 'text/event-stream' do |userId|
   stream :keep_open do |out|
-    connections << out
-    out.callback { connections.delete(out) }
+    @@chatRoom.Welcome userId, out
   end
 end
 
-post '/' do
-  connections.each { |out| out << "data: #{params[:msg]}\n\n" }
-  204 # response without entity body
+get '/chat/:userId' do |userId|
+  @userId = userId
+  redirect '/chat' if @@chatRoom.FindUser(userId).nil?
+  erb :chat_room
 end
 
-__END__
-
-@@ layout
-<html>
-  <head>
-    <title>Super Simple Chat with Sinatra</title>
-    <meta charset="utf-8" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  </head>
-  <body><%= yield %></body>
-</html>
-
-@@ login
-<form action='/'>
-  <label for='user'>User Name:</label>
-  <input name='user' value='' />
-  <input type='submit' value="GO!" />
-</form>
-
-@@ chat
-<pre id='chat'></pre>
-<form>
-  <input id='msg' placeholder='type message here...' />
-</form>
-
-<script>
-  // reading
-  var es = new EventSource('/stream');
-  es.onmessage = function(e) { $('#chat').append(e.data + "\n") };
-
-  // writing
-  $("form").on('submit',function(e) {
-    $.post('/', {msg: "<%= user %>: " + $('#msg').val()});
-    $('#msg').val(''); $('#msg').focus();
-    e.preventDefault();
-  });
-</script>
-
+post '/chat/send' do
+  userId = params[:userId]
+  message = params[:message]
+  @@chatRoom.SendMessage(userId, message)
+  204 # response without entity body
+end
