@@ -76,12 +76,16 @@ class HomuGetter
       body = []
       body_index = 0
       block.xpath("//html//body//blockquote").each do |content|
-        body << content.content
+        body << process_content(content.content)
         content.content = "{ \"Head\":#{head_index}, \"Body\":#{body_index} }"
         body_index += 1
       end
       @contents << body
       head_index += 1
     end
+  end
+
+  def process_content content
+    return content.lstrip
   end
 end

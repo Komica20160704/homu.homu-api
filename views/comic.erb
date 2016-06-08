@@ -28,6 +28,10 @@
       display: inline-block;
       background-color: rgb(240, 224, 214);
     }
+    .page_button {
+      width: 50%;
+      position: absolute;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript">
@@ -40,8 +44,30 @@
       if (block.Picture) {
         LoadPage(GetImgURL(block.Picture));
       } else {
-        LoadPage("../no_pic.jpg");
+        if ($("#page_img")[0].src.match("no_pic\.jpg")) {
+          return;
+        } else {
+          LoadPage("../no_pic.jpg");
+        }
       };
+    }
+
+    function PreLoadImg(block) {
+      if (block.Picture) {
+        PreLoadPage(GetImgURL(block.Picture));
+      } else {
+        PreLoadPage("../no_pic.jpg");
+      };
+    }
+
+    function LoadPage(img) {
+      $("#page_loading").css("display", "block");
+      $("#page_img").css("display", "none");
+      $("#page_img")[0].src = img;
+    }
+
+    function PreLoadPage(img) {
+      $("#page_preload")[0].src = img;
     }
 
     function LoadDialog(block) {
@@ -49,8 +75,8 @@
       $("#dialog").css("display", "inline-block");
       var then = new Date("20" + block.Date);
       var theday = then.getDay();
-      dialog_title.innerText = block.Title
-      dialog_name.innerText = block.Name
+      dialog_title.children[0].innerText = block.Title
+      dialog_name.children[0].innerText = block.Name
       var data = block.Date + "(" + weekday[theday] + ")" + block.Time + " ID:" + block.Id + " No." + block.No;
       dialog_data.innerText = data
       dialog_content.innerText = block.Content
@@ -62,19 +88,17 @@
       return img_url + pic;
     }
 
-    function LoadPage(img) {
-      $("#page_img")[0].src = img;
-    }
-
     function PrePage() {
       if (index > -1) {
         index--;
         if (index == -1) {
           LoadImg(res.Head);
           LoadDialog(res.Head);
+          PreLoadImg(res.Bodies[0]);
         } else {
           LoadImg(res.Bodies[index]);
           LoadDialog(res.Bodies[index]);
+          PreLoadImg(res.Bodies[index + 1]);
         }
       };
     }
@@ -84,6 +108,7 @@
         index++;
         LoadImg(res.Bodies[index]);
         LoadDialog(res.Bodies[index]);
+        PreLoadImg(res.Bodies[index + 1]);
       }
     }
   </script>
@@ -95,16 +120,18 @@
   </p>
   <hr width="90%" size="1">
   <div style="width:100%;">
-    <div id="page_btn_l" style="width:50%;height:100%;position:fixed;left:50%;" onclick="NextPage();"></div>
-    <div id="page_btn_r" style="width:50%;height:100%;position:fixed;" onclick="PrePage();"></div>
+    <div id="page_btn_l" class="page_button" style="left:50%;" onclick="NextPage();"></div>
+    <div id="page_btn_r" class="page_button" onclick="PrePage();"></div>
+    <div id="page_loading" style="display:none;" align="center"><font color="#cc1105" size="+1"><b>圖片讀取中</b></font></div>
     <div id="page_container" style="margin:auto;">
       <img id="page_img" alt="No Picture!">
     </div>
+    <div style="display:none;"><img id="page_preload"></div>
   </div>
   <hr>
   <div id="dialog" class="dialog" style="">
-    <font id="dialog_title" color="#cc1105" size="+1"><b></b></font> 
-    <font id="dialog_name" color="#117743"><b></b></font> 
+    <font id="dialog_title" color="#cc1105" size="+1"><b></b></font>
+    <font id="dialog_name" color="#117743"><b></b></font>
     <font id="dialog_data"></font>
     <blockquote id="dialog_content"></blockquote>
   </div>
@@ -114,18 +141,20 @@
   $("#page_img").load( function() {
     $("#page_img").css("width", "");
     var w = $(this).width();
-    var h = $(this).height();
     var t = $(head_bar).height();
     if (w > Math.ceil(window.screen.width * 0.9)) {
       w = Math.ceil(window.screen.width * 0.9);
       $("#page_img").css("width", w + "px");
     }
+    $("#page_img").css("display", "block");
+    $("#page_loading").css("display", "none");
     $("#page_container").css("width", w + "px");
-    $("#page_btn_l").css("height", h + "px");
-    $("#page_btn_r").css("height", h + "px");
+    $("#page_btn_l").css("height", $(this).height() + "px");
+    $("#page_btn_r").css("height", $(this).height() + "px");
   });
   LoadImg(res.Head);
   LoadDialog(res.Head);
+  PreLoadImg(res.Bodies[0]);
 </script>
 
 </html>
