@@ -1,2 +1,0 @@
-#! /usr/bin/ruby -w
-File.write $OPENSHIFT_RUBY_LOG_DIR, 'a min'
