@@ -60,6 +60,7 @@ end
 # end
 
 require './Domain/OnlyWatch/HeroGetter'
+require './Domain/OnlyWatch/HeroRecorder'
 
 get '/onlywatch' do
   getter = OnlyWatch::HeroGetter.new
@@ -67,15 +68,9 @@ get '/onlywatch' do
 end
 
 get '/onlywatch/record' do
-  require 'fileutils'
   getter = OnlyWatch::HeroGetter.new
-  time = Time.new.strftime("%Y-%m-%d")
+  recorder = OnlyWatch::HeroRecorder.new
   data = getter.DownloadHeroDatas.to_json
-  path = ENV['OPENSHIFT_DATA_DIR'] + 'onlywatch/' + time + '.dat'
-  dirname = File.dirname(path)
-  unless File.directory?(dirname)
-    FileUtils.mkdir_p(dirname)
-  end
-  File.write path, data
+  recorder.Record data
   204
 end
