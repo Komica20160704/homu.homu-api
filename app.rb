@@ -58,11 +58,17 @@ end
 #   @page = '0' if @page.nil?
 #   erb :ptt_index
 # end
+require './Domain/OnlyWatch/HeroGetter'
 
 get '/onlywatch' do
-  require './Domain/OnlyWatch/HeroGetter'
   getter = OnlyWatch::HeroGetter.new
+  getter.DownloadHeroDatas.to_json
+end
+
+get '/onlywatch/record' do
+  getter = OnlyWatch::HeroGetter.new
+  time = Time.new.strftime("%Y-%m-%d")
   data = getter.DownloadHeroDatas.to_json
-  File.write ENV['OPENSHIFT_DATA_DIR'] + 'onlywatch.txt', data
-  data
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'onlywatch/' + time + '.dat', data
+  204
 end

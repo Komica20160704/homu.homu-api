@@ -4,4 +4,4 @@ ENV.keys.each do |key|
 end
 
 require 'open-uri'
-open('http://' + ENV['OPENSHIFT_GEAR_DNS'] + '/onlywatch')
+open('http://' + ENV['OPENSHIFT_GEAR_DNS'] + '/onlywatch/record')
