@@ -53,7 +53,7 @@
     }
 
     function PreLoadImg(block) {
-      if (block.Picture) {
+      if (block && block.Picture) {
         PreLoadPage(GetImgURL(block.Picture));
       } else {
         PreLoadPage("../no_pic.jpg");
@@ -70,9 +70,9 @@
       $("#page_preload")[0].src = img;
     }
 
-    function LoadDialog(block) {
-      $("#dialog").css("width", "");
-      $("#dialog").css("display", "inline-block");
+    function LoadDialog(id, block) {
+      $(id).css("width", "");
+      $(id).css("display", "inline-block");
       var then = new Date("20" + block.Date);
       var theday = then.getDay();
       dialog_title.children[0].innerText = block.Title
@@ -80,25 +80,46 @@
       var data = block.Date + "(" + weekday[theday] + ")" + block.Time + " ID:" + block.Id + " No." + block.No;
       dialog_data.innerText = data
       dialog_content.innerText = block.Content
-      $("#dialog").css("width", (dialog.clientWidth - 19) + "px");
-      $("#dialog").css("display", "block");
+      $(id).css("width", (dialog.clientWidth - 19) + "px");
+      $(id).css("display", "block");
     }
 
     function GetImgURL(pic) {
       return img_url + pic;
     }
 
+    function LoadHead() {
+      LoadImg(res.Head);
+      LoadDialog("#dialog", res.Head);
+      PreLoadImg(res.Bodies[0]);
+    }
+
+    function LoadBody(index) {
+      LoadImg(res.Bodies[index]);
+      LoadDialog("#dialog", res.Bodies[index]);
+      PreLoadImg(res.Bodies[index + 1]);
+    }
+
+    function OnPageImgLoad() {
+      $(this).css("width", "");
+      var width = $(this).width();
+      if (width > Math.ceil(window.screen.width * 0.9)) {
+        width = Math.ceil(window.screen.width * 0.9);
+        $("#page_img").css("width", width + "px");
+      }
+      $("#page_img").css("display", "block");
+      $("#page_loading").css("display", "none");
+      $("#page_container").css("width", width + "px");
+      $(".page_button").css("height", $(this).height() + "px");
+    }
+
     function PrePage() {
       if (index > -1) {
         index--;
         if (index == -1) {
-          LoadImg(res.Head);
-          LoadDialog(res.Head);
-          PreLoadImg(res.Bodies[0]);
+          LoadHead();
         } else {
-          LoadImg(res.Bodies[index]);
-          LoadDialog(res.Bodies[index]);
-          PreLoadImg(res.Bodies[index + 1]);
+          LoadBody(index);
         }
       };
     }
@@ -106,9 +127,9 @@
     function NextPage() {
       if (index < res.Bodies.length - 1) {
         index++;
-        LoadImg(res.Bodies[index]);
-        LoadDialog(res.Bodies[index]);
-        PreLoadImg(res.Bodies[index + 1]);
+        LoadBody(index);
+      } else {
+        alert("沒有下一張了");
       }
     }
   </script>
@@ -138,23 +159,8 @@
 </body>
 
 <script type="text/javascript">
-  $("#page_img").load( function() {
-    $("#page_img").css("width", "");
-    var w = $(this).width();
-    var t = $(head_bar).height();
-    if (w > Math.ceil(window.screen.width * 0.9)) {
-      w = Math.ceil(window.screen.width * 0.9);
-      $("#page_img").css("width", w + "px");
-    }
-    $("#page_img").css("display", "block");
-    $("#page_loading").css("display", "none");
-    $("#page_container").css("width", w + "px");
-    $("#page_btn_l").css("height", $(this).height() + "px");
-    $("#page_btn_r").css("height", $(this).height() + "px");
-  });
-  LoadImg(res.Head);
-  LoadDialog(res.Head);
-  PreLoadImg(res.Bodies[0]);
+  $("#page_img").load(OnPageImgLoad);
+  LoadHead();
 </script>
 
 </html>
