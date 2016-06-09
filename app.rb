@@ -62,5 +62,7 @@ end
 get '/onlywatch' do
   require './Domain/OnlyWatch/HeroGetter'
   getter = OnlyWatch::HeroGetter.new
-  getter.DownloadHeroDatas.to_json
+  data = getter.DownloadHeroDatas.to_json
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'onlywatch.txt', data
+  data
 end
