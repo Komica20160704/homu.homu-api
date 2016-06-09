@@ -52,9 +52,15 @@ get '/comic/:no' do |no|
   end
 end
 
-get '/:board/' do |board|
-  @page = params['page']
-  @board = board
-  @page = '0' if @page.nil?
-  erb :ptt_index
+# get '/:board/' do |board|
+#   @page = params['page']
+#   @board = board
+#   @page = '0' if @page.nil?
+#   erb :ptt_index
+# end
+
+get '/onlywatch' do
+  require './Domain/OnlyWatch/HeroGetter'
+  getter = OnlyWatch::HeroGetter.new
+  getter.DownloadHeroDatas.to_json
 end
