@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Undead World - Homu</title>
+  <link rel="stylesheet" type="text/css" href="./game.css">
+</head>
+
+<body>
+  <div class="block" style="padding-left:20px">
+    <h1>如何註冊</h1>
+    1. 到綜合版回應討論串<br>
+    2. 於E-mail輸入sage、內文輸入"我要出來玩"並輸入刪除密碼<br>
+    3. 送出回應<br>
+    4. 回到本頁填寫並送出表單<br>
+    5. 伺服器將回應刪除並完成認證<br>
+  </div>
+  <br>
+  <form class="VarifyForm block" action="./varify" method="POST">
+    <div style="font-size:25px;font-weight:bold;">註冊</div>
+    <div><div class="VarifyFormText">ID</div><input type="text" name="id" class="VarifyFormInput"></div>
+    <div><div class="VarifyFormText">討論串編號</div><input type="text" name="number" class="VarifyFormInput"></div>
+    <div><div class="VarifyFormText">文章編號</div><input type="text" name="number" class="VarifyFormInput"></div>
+    <div><div class="VarifyFormText">刪除用密碼</div><input type="text" name="password" class="VarifyFormInput"></div>
+    <input type="Submit" value="Sing In" style="margin-top:5px;">
+  </form>
+</body>
+
+</html>

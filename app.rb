@@ -79,3 +79,11 @@ get '/onlywatch/report' do
   recorder = OnlyWatch::HeroRecorder.new
   recorder.Report.to_json
 end
+
+get '/game' do
+  erb :game
+end
+
+post '/test' do
+  params.to_json
+end

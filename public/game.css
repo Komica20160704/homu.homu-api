@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body {
+  width: 90%;
+  margin: auto;
+  margin-top: 8px;
+  font-family: 微軟正黑體;
+}
+
+.block{
+  background-color: rgb(200, 200, 200);
+  padding: 5px;
+  border: 1px solid rgb(180, 180, 180);
+  color: rgb(0, 0, 0);
+}
+
+.VarifyForm {
+  width: 300px;
+  margin: auto;
+}
+
+.VarifyFormText {
+  width: 100px;
+  float: left;
+  color: rgb(128, 128, 128);
+}
+
+.VarifyFormInput {
+  width: 200px;
+  border: 0px;
+  background-color: rgb(255, 255, 255);
+}
