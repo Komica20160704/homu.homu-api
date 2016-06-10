@@ -74,3 +74,8 @@ get '/onlywatch/record' do
   recorder.Record data
   204
 end
+
+get '/onlywatch/report' do
+  recorder = OnlyWatch::HeroRecorder.new
+  recorder.Report.to_json
+end
