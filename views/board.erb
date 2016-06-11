@@ -11,7 +11,7 @@
   <div class="block" style="width:75%;margin:auto;">
     <h1>布告欄</h1>
     <% message_lines.each do |line| %>
-    <%= line[:id] + ': ' +  line[:message] + '<span style="float:right;">' + line[:time_stamp] + '</span><br>' %>
+    <%= line['id'] + ': ' +  line['message'] + '<span style="float:right;">' + line['time_stamp'] + '</span><br>' %>
     <% end %>
   </div>
   <form class="block" style="width:75%;margin:auto;" action="./post" method="POST">

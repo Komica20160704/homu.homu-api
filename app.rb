@@ -83,14 +83,18 @@ end
 
 
 begin
-  data = File.read(ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', :encoding => 'UTF-8')
-  data = JSON.parse data
+  udata = File.read(ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', :encoding => 'UTF-8')
+  udata = JSON.parse udata
+  mdata = File.read(ENV['OPENSHIFT_DATA_DIR'] + 'game_message_lines.txt', :encoding => 'UTF-8')
+  mdata = JSON.parse mdata
 rescue
-  data = [ { 'id' => "admin", 'password' => "qwerasdf", 'url' => "qwerasdf" } ]
-  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', data.to_json
+  udata = [ { 'id' => "admin", 'password' => "qwerasdf", 'url' => "qwerasdf" } ]
+  mdata = [ { 'id' => ":::::", 'message' => '測試用聊天室 須手動重新整理', 'time_stamp' => '::::::' } ]
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', udata.to_json
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_message_lines.txt', mdata.to_json
 end
-users = data
-message_lines = []
+users = udata
+message_lines = mdata
 configure(:development) { set :session_secret, "take_it_down" }
 enable :sessions
 
@@ -101,6 +105,7 @@ end
 
 get '/game/save' do
   File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', users.to_json
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_message_lines.txt', message_lines.to_json
   204
 end
 
@@ -132,7 +137,7 @@ post '/game/post' do
   end
   return 204 if user.nil?
   time = Time.new.strftime("%Y/%m/%d %H:%M")
-  message_line = { :id => user['id'], :message => params['message'], :time_stamp => time }
+  message_line = { 'id' => user['id'], 'message' => params['message'], 'time_stamp' => time }
   message_lines << message_line if params['message'] != ''
   redirect "/game/#{user['url']}"
 end
