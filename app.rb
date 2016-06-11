@@ -83,6 +83,7 @@ end
 
 users = [ { :id => "admin", :password => "qwerasdf", :url => "qwerasdf" } ]
 message_lines = []
+configure(:development) { set :session_secret, "take_it_down" }
 enable :sessions
 
 get '/game' do
