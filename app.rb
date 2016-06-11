@@ -111,6 +111,7 @@ post '/game/post' do
   user = users.find do |user|
     user[:url] == session[:url]
   end
+  204 if user.nil?
   time = Time.new.strftime("%Y/%m/%d %H:%M")
   message_line = { :id => user[:id], :message => params['message'], :time_stamp => time }
   message_lines << message_line if params['message'] != ''
