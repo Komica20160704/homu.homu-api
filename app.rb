@@ -81,7 +81,15 @@ get '/onlywatch/report' do
   recorder.Report.to_json
 end
 
-users = [ { :id => "admin", :password => "qwerasdf", :url => "qwerasdf" } ]
+
+begin
+  data = File.read(ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', :encoding => 'UTF-8')
+  data = JSON.parse data
+rescue
+  data = [ { 'id' => "admin", 'password' => "qwerasdf", 'url' => "qwerasdf" } ]
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', data.to_json
+end
+users = data
 message_lines = []
 configure(:development) { set :session_secret, "take_it_down" }
 enable :sessions
@@ -91,40 +99,49 @@ get '/game' do
   erb :game
 end
 
+get '/game/save' do
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', users.to_json
+  204
+end
+
 get '/game/:url' do |url|
   user = users.find do |user|
-    user[:url] == url
+    user['url'] == url
   end
-  redirect "/game/#{session[:url] = nil}" if user.nil?
+  if user.nil?
+    session['url'] = nil
+    redirect "/game"
+  end
+  session[:url] = url
   ml = message_lines.size > 30 ? message_lines[-30] : message_lines
-  erb :board, :locals => { :id => user[:id], :url => url, :message_lines => ml }
+  erb :board, :locals => { :id => user['id'], :url => url, :message_lines => ml }
 end
 
 post '/game/login' do
   user = users.find do |user|
-    user[:id] == params['id'] and user[:password] == params['password']
+    user['id'] == params['id'] and user['password'] == params['password']
   end
-  session[:url] = user[:url]
-  redirect "/game/#{user[:url]}"
+  redirect "/game" if user.nil?
+  session[:url] = user['url']
+  redirect "/game/#{user['url']}"
 end
 
 post '/game/post' do
-  puts "session: #{session}"
   user = users.find do |user|
-    user[:url] == session[:url]
+    user['url'] == session[:url]
   end
   return 204 if user.nil?
   time = Time.new.strftime("%Y/%m/%d %H:%M")
-  message_line = { :id => user[:id], :message => params['message'], :time_stamp => time }
+  message_line = { :id => user['id'], :message => params['message'], :time_stamp => time }
   message_lines << message_line if params['message'] != ''
-  redirect "/game/#{user[:url]}"
+  redirect "/game/#{user['url']}"
 end
 
 post '/verify' do
   begin
     HomuAPI.Verify params
     url = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    users << { :id => params['id'], :password => params['password'], :url => url }
+    users << { 'id' => params['id'], 'password' => params['password'], 'url' => url }
     redirect "/game/#{url}"
   rescue Exception => e
     '驗證失敗: ' + e.message
