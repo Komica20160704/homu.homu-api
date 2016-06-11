@@ -109,7 +109,7 @@ post '/game/login' do
 end
 
 post '/game/post' do
-  puts "session[:url]: #{session[:url]}"
+  puts "session: #{session}"
   user = users.find do |user|
     user[:url] == session[:url]
   end
