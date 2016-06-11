@@ -4,7 +4,7 @@ body {
   width: 90%;
   margin: auto;
   margin-top: 8px;
-  font-family: 微軟正黑體;
+  font-family: 新細明體;
 }
 
 .block{
@@ -14,18 +14,18 @@ body {
   color: rgb(0, 0, 0);
 }
 
-.VarifyForm {
+.Form {
   width: 300px;
   margin: auto;
 }
 
-.VarifyFormText {
+.FormText {
   width: 100px;
   float: left;
   color: rgb(128, 128, 128);
 }
 
-.VarifyFormInput {
+.FormInput {
   width: 200px;
   border: 0px;
   background-color: rgb(255, 255, 255);

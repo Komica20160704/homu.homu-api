@@ -22,7 +22,6 @@ end
 get '/res/:no' do |no|
   begin
     res = HomuAPI.GetRes(no, :archive => params['archive'])
-    puts res
     return JSON.pretty_generate(res)
   rescue PageNotFoundException
     status 404
@@ -59,6 +58,8 @@ end
 #   erb :ptt_index
 # end
 
+ENV['OPENSHIFT_DATA_DIR'] = './temp/' if ENV['OPENSHIFT_DATA_DIR'].nil?
+
 require './Domain/OnlyWatch/HeroGetter'
 require './Domain/OnlyWatch/HeroRecorder'
 
@@ -80,8 +81,51 @@ get '/onlywatch/report' do
   recorder.Report.to_json
 end
 
+users = [ { :id => "admin", :password => "qwerasdf", :url => "qwerasdf" } ]
+message_lines = []
+enable :sessions
+
 get '/game' do
+  redirect "/game/#{session[:url]}" if session[:url]
   erb :game
+end
+
+get '/game/:url' do |url|
+  user = users.find do |user|
+    user[:url] == url
+  end
+  redirect "/game/#{session[:url] = nil}" if user.nil?
+  ml = message_lines.size > 30 ? message_lines[-30] : message_lines
+  erb :board, :locals => { :id => user[:id], :url => url, :message_lines => ml }
+end
+
+post '/game/login' do
+  user = users.find do |user|
+    user[:id] == params['id'] and user[:password] == params['password']
+  end
+  session[:url] = user[:url]
+  redirect "/game/#{user[:url]}"
+end
+
+post '/game/post' do
+  user = users.find do |user|
+    user[:url] == session[:url]
+  end
+  time = Time.new.strftime("%Y/%m/%d %H:%M")
+  message_line = { :id => user[:id], :message => params['message'], :time_stamp => time }
+  message_lines << message_line if params['message'] != ''
+  redirect "/game/#{user[:url]}"
+end
+
+post '/verify' do
+  begin
+    HomuAPI.Verify params
+    url = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+    users << { :id => params['id'], :password => params['password'], :url => url }
+    redirect "/game/#{url}"
+  rescue Exception => e
+    '驗證失敗: ' + e.message
+  end
 end
 
 post '/test' do
