@@ -140,8 +140,16 @@ end
 post '/verify' do
   begin
     HomuAPI.Verify params
-    url = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    users << { 'id' => params['id'], 'password' => params['password'], 'url' => url }
+    user = users.find do |u|
+      u['id'] == params['id']
+    end
+    if user.nil?
+      url = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+      users << { 'id' => params['id'], 'password' => params['password'], 'url' => url }
+    else
+      url = user['url']
+      user['password'] = params['password']
+    end
     redirect "/game/#{url}"
   rescue Exception => e
     '驗證失敗: ' + e.message
