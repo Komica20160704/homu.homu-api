@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/async'
 require 'eventmachine'
 require './Domain/ChatRoom/ChatRoom'
 
