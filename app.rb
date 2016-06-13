@@ -169,4 +169,4 @@ post '/test' do
   params.to_json
 end
 
-require './chat.rb'
+# require './chat.rb'
