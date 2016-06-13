@@ -3,6 +3,13 @@ require 'sinatra/async'
 require 'eventmachine'
 require './Domain/ChatRoom/ChatRoom'
 
+begin
+  gem 'passenger', '=5.0.28'
+  require 'passenger'
+rescue Exception => e
+  puts e.message
+end
+
 class EventSource
   include EventMachine::Deferrable
 
@@ -20,7 +27,6 @@ class EventSource
   end
 end
 
-register Sinatra::Async
 subscribers = []
 
 get '/subscribe' do
