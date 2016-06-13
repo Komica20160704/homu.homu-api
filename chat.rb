@@ -20,6 +20,7 @@ class EventSource
   end
 end
 
+register Sinatra::Async
 subscribers = []
 
 get '/subscribe' do
