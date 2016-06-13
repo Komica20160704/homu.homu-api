@@ -86,7 +86,7 @@ begin
   udata = JSON.parse udata
 rescue
   udata = [ { 'id' => "admin", 'password' => "qwerasdf", 'url' => "qwerasdf" } ]
-  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', udata.to_jso
+  File.write ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', udata.to_json
 end
 
 begin
@@ -168,3 +168,5 @@ end
 post '/test' do
   params.to_json
 end
+
+require './chat.rb'
