@@ -1,5 +1,40 @@
 require 'sinatra'
+require 'eventmachine'
 require './Domain/ChatRoom/ChatRoom'
+
+class EventSource
+  include EventMachine::Deferrable
+
+  def send(data, id = nil)
+    data.each_line do |line|
+      line = "data: #{line.strip}\n"
+      @body_callback.call line
+    end
+    @body_callback.call "id: #{id}\n" if id
+    @body_callback.call "\n"
+  end
+
+  def each(&blk)
+    @body_callback = blk
+  end
+end
+
+subscribers = []
+
+get '/subscribe' do
+  content_type request.preferred_type("text/event-stream", "text/plain")
+  body EventSource.new
+  subscribers << body
+  EM.next_tick { env['async.callback'].call response.finish }
+  throw :async
+end
+
+post '/msg_subscribe' do
+  subscribers.each do |subscriber|
+    subscriber.send params[:message]
+  end
+  204
+end
 
 set :server, :thin
 @@chatRoom = ChatRoom::ChatRoom.new

@@ -9,7 +9,7 @@
     function sendMessage() {
       $.ajax({
         method: "POST",
-        url: "send",
+        url: "../msg_subscribe",
         data: { userId: "<%= @userId %>", message: message.value }
       });
     };
@@ -25,7 +25,8 @@
 </body>
 
 <script type="text/javascript">
-  var es = new EventSource('/chat/subject/<%= @userId %>');
+  // var es = new EventSource('/chat/subject/<%= @userId %>');
+  var es = new EventSource('../subscribe');
   es.onmessage = function(e) {
     document.getElementById("messageLines").innerHTML += e.data + '<br>';
   };

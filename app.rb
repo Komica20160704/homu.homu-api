@@ -168,3 +168,5 @@ end
 post '/test' do
   params.to_json
 end
+
+require './chat.rb'
