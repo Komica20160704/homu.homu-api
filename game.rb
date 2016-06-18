@@ -1,3 +1,4 @@
+# encoding: utf-8
 ENV['OPENSHIFT_DATA_DIR'] = './temp/' if ENV['OPENSHIFT_DATA_DIR'].nil?
 
 begin
