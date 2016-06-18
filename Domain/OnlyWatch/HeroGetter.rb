@@ -7,7 +7,6 @@ module OnlyWatch
   class HeroGetter
     def initialize
       @url = 'http://masteroverwatch.com/heroes'
-
     end
 
     def DownloadHeroDatas

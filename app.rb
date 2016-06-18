@@ -51,35 +51,7 @@ get '/comic/:no' do |no|
   end
 end
 
-# get '/:board/' do |board|
-#   @page = params['page']
-#   @board = board
-#   @page = '0' if @page.nil?
-#   erb :ptt_index
-# end
-
 ENV['OPENSHIFT_DATA_DIR'] = './temp/' if ENV['OPENSHIFT_DATA_DIR'].nil?
-
-require './Domain/OnlyWatch/HeroGetter'
-require './Domain/OnlyWatch/HeroRecorder'
-
-get '/onlywatch' do
-  getter = OnlyWatch::HeroGetter.new
-  getter.DownloadHeroDatas.to_json
-end
-
-get '/onlywatch/record' do
-  getter = OnlyWatch::HeroGetter.new
-  recorder = OnlyWatch::HeroRecorder.new
-  data = getter.DownloadHeroDatas.to_json
-  recorder.Record data
-  204
-end
-
-get '/onlywatch/report' do
-  recorder = OnlyWatch::HeroRecorder.new
-  recorder.Report.to_json
-end
 
 begin
   udata = File.read(ENV['OPENSHIFT_DATA_DIR'] + 'game_users.txt', :encoding => 'UTF-8')
