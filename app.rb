@@ -15,7 +15,7 @@ get '/page/:page' do |page|
     return JSON.pretty_generate(HomuAPI.GetPage(page))
   rescue OpenURI::HTTPError
     status 404
-    return { :message => "找不到此頁" }.to_json
+    return { :success => 0, :message => "找不到此頁" }.to_json
   end
 end
 
@@ -25,7 +25,7 @@ get '/res/:no' do |no|
     return JSON.pretty_generate(res)
   rescue PageNotFoundException
     status 404
-    return { :message => "找不到此討論串" }.to_json
+    return { :success => 0, :message => "找不到此討論串" }.to_json
   end
 end
 
@@ -51,7 +51,11 @@ get '/comic/:no' do |no|
   end
 end
 
-require './game.rb'
+get '/api' do
+  erb :api
+end
+
+# require './game.rb'
 
 post '/test' do
   params.to_json

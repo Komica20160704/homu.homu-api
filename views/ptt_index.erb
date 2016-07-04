@@ -84,7 +84,7 @@
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='http://web.komica.org/' target='_blank'>KOMICA</a> - <a href='http://homu.komica.org/00/index.htm' target="_blank">綜合</a> - 討論串列表</span><a href='./game' style="float:right">島外認證器</a></div></div>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='http://web.komica.org/' target='_blank'>KOMICA</a> - <a href='http://homu.komica.org/00/index.htm' target="_blank">綜合</a> - 討論串列表</span><a href='./api' style="float:right">APIs</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><span class='f0 b7'>   編號    日 期 作  者   文  章  標  題                                                            </span>
 <% heads.each do |head| %><span><%= head['No']%> <%= get_puch_count head['Hidenbodycount']%> <%= head['Date'][3..7]%> <%= head['Id']%> <%= get_title head%></span>
 <% end %><span>
