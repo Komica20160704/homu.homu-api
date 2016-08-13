@@ -8,7 +8,7 @@ class HomuBlockParser
     @contents = contents
     @detail_format = /(.{0,})\s\n\s(.{0,})\s(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d:\d\d)\sID:(.{0,})\sNo.([\d]+)\sdel/
     @detail_format_a = /(.{0,})\n姓名:\s(.{0,})\s\[(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d:\d\d)\sID:(.{0,})\]\sNo.([\d]+)/
-    @picture_format = /檔名：([\d]+\.[\w]+)-\([\d]+\sB\)\n以縮圖顯示，點擊後以原尺寸顯示。/
+    @picture_format = /檔名：([\d]+\.[\w]+)-\([\d]+\sB\)\n(以縮圖顯示，點擊後以原尺寸顯示。|)/
     @picture_format_a = /檔名：([\d]+\.[\w]+)-\([\d]+\sKB, [\d]+x[\d]+\)/
     @content_format = /\{ \"Head\":[\d]+, \"Body\":[\d]+ \}/
     @hiden_body_format = /回應有([\d]+)篇被省略。要閱讀所有回應請按下返信連結。/
