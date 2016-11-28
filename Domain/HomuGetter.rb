@@ -34,10 +34,14 @@ class HomuGetter
     @html.search('font').each do |n| n = n.text if n['color'] == '789922' end
     # @main_form = @isGetfromArchive ? @html.xpath("//html//body//div")[1] : @html.xpath("//html//form")[1]
     zones = @html.to_s.split '<sprate>sprate</sprate>'
-    zones = zones[3..-2]
+    # zones = zones[3..-2]
     @blocks = []
     zones.each do |z|
-      @blocks << Nokogiri::HTML(z)
+      # puts '====='
+      # puts z
+      if z.match /(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d:\d\d)\sID:(.{0,})\sNo.([\d]+)/
+        @blocks << Nokogiri::HTML(z)
+      end
     end
     # @main_form = @html
     # raise PageNotFoundException if @main_form.nil?
