@@ -30,11 +30,18 @@ class HomuGetter
 
   def CutHtml
     @html.search('br').each do |n| n.replace("\n") end
-    @html.search('hr').each do |n| n.replace('<sprate>sprate<\sprate>') end
+    @html.search('hr').each do |n| n.replace('<sprate>sprate</sprate>') end
     @html.search('font').each do |n| n = n.text if n['color'] == '789922' end
-    @main_form = @isGetfromArchive ? @html.xpath("//html//body//div")[1] : @html.xpath("//html//form")[1]
-    raise PageNotFoundException if @main_form.nil?
-    make_blocks
+    # @main_form = @isGetfromArchive ? @html.xpath("//html//body//div")[1] : @html.xpath("//html//form")[1]
+    zones = @html.to_s.split '<sprate>sprate</sprate>'
+    zones = zones[3..-2]
+    @blocks = []
+    zones.each do |z|
+      @blocks << Nokogiri::HTML(z)
+    end
+    # @main_form = @html
+    # raise PageNotFoundException if @main_form.nil?
+    # make_blocks
     save_contents
   end
 
