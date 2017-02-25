@@ -5,13 +5,13 @@ require './Domain/Exception/PageNotFoundException'
 
 class HomuPoster
   def PostNew params
-    uri = URI("http://homu.komica.org/00/index.php")
+    uri = URI("http://rem.komica.org/00/index.php")
     https = Net::HTTP.new(uri.host, uri.port)
     puts https.post(uri.path, get_post_body(params)).body
   end
 
   def PostDeletion no, pwd
-    uri = URI("http://homu.komica.org/00/index.php")
+    uri = URI("http://rem.komica.org/00/index.php")
     https = Net::HTTP.new(uri.host, uri.port)
     post_body = get_post_body({ no => "delete", "mode" => "usrdel", "pwd" => pwd })
     result = https.post(uri.path, post_body).body

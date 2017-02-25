@@ -1,7 +1,7 @@
 <%
   require './Domain/HomuAPI'
   res = HomuAPI.GetRes @ref_no, :archive => params['archive']
-  url = params['archive'].nil? ? 'http://homu.komica.org/00/src/' : 'http://archive.komica.org/00/src/'
+  url = params['archive'].nil? ? 'http://rem.komica.org/00/src/' : 'http://archive.komica.org/00/src/'
 %>
 
 <!DOCTYPE html>
