@@ -64,8 +64,7 @@ class HomuBlockParser
     #   return matched[1]
     # end
     matched = dialog.css('div.file-text a').text
-    puts matched
-    if matched
+    if matched.strip != ''
       return matched
     end
     return nil
@@ -78,7 +77,7 @@ class HomuBlockParser
     # return @contents[content['Head']][content['Body']]
     matched = dialog.css('div.quote').text
     if matched
-      return matched
+      return matched.strip
     end
     return nil
   end
@@ -90,9 +89,10 @@ class HomuBlockParser
     #   return matched[1]
     # end
     # return nil
-    matched = dialog.css('span.warn_txt2').text
+
+    matched = dialog.css('span.warn_txt2').text.match(/有回應\s(\d+)\s篇被省略。要閱讀所有回應請按下回應連結。/)
     if matched
-      return matched
+      return matched[1]
     end
     return nil
   end

@@ -10,7 +10,7 @@ class HomuGetter
   def initialize
     @page_url = 'http://rem.komica.org/'
     @archive_url = 'http://archive.komica.org/'
-    @res_url = '/index.php?res='
+    @res_url = '/pixmicat.php?res='
     @board = '00'
     @isGetfromArchive = false
   end
