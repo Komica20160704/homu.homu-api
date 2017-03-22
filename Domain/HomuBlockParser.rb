@@ -17,8 +17,8 @@ class HomuBlockParser
   def Parse block
     block_hash = Hash.new
     bodies = []
-    block = block.text
-    dialogs = block.split '…'
+    dialogs = block.css('div.post')
+
     dialogs.each do |dialog|
       detail = do_match dialog
       if block_hash['Head'].nil?
@@ -42,34 +42,57 @@ class HomuBlockParser
   end
 
   def match_detail dialog
-    format = @isGetfromArchive ? @detail_format_a : @detail_format
-    matched = dialog.match format
-    dialog.sub! matched[0], ''
-    return Detail.new matched
+    # format = @isGetfromArchive ? @detail_format_a : @detail_format
+    # matched = dialog.match format
+    # dialog.sub! matched[0], ''
+    datas = ['nil']
+    datas.push(dialog.css('span.title').text)
+    datas.push(dialog.css('span.name').text)
+    matched = dialog.css('span.now').text.match /(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d)\sID:(.{0,})/
+    datas.push(matched[1])
+    datas.push(matched[2])
+    datas.push(matched[3])
+    datas.push(dialog.css('span.qlink').text.split('.')[1])
+    return Detail.new datas
   end
 
   def match_picture dialog
-    format = @isGetfromArchive ? @picture_format_a : @picture_format
-    matched = dialog.match format
+    # format = @isGetfromArchive ? @picture_format_a : @picture_format
+    # matched = dialog.match format
+    # if matched
+    #   dialog.sub! matched[0], ''
+    #   return matched[1]
+    # end
+    matched = dialog.css('div.file-text a').text
+    puts matched
     if matched
-      dialog.sub! matched[0], ''
-      return matched[1]
+      return matched
     end
     return nil
   end
 
   def match_content dialog
-    matched = dialog.match @content_format
-    dialog.sub! matched[0], ''
-    content = JSON.parse matched[0]
-    return @contents[content['Head']][content['Body']]
+    # matched = dialog.match @content_format
+    # dialog.sub! matched[0], ''
+    # content = JSON.parse matched[0]
+    # return @contents[content['Head']][content['Body']]
+    matched = dialog.css('div.quote').text
+    if matched
+      return matched
+    end
+    return nil
   end
 
   def match_hiden_body dialog
-    matched = dialog.match @hiden_body_format
+    # matched = dialog.match @hiden_body_format
+    # if matched
+    #   dialog.sub! matched[0], ''
+    #   return matched[1]
+    # end
+    # return nil
+    matched = dialog.css('span.warn_txt2').text
     if matched
-      dialog.sub! matched[0], ''
-      return matched[1]
+      return matched
     end
     return nil
   end

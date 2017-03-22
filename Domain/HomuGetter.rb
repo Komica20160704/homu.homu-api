@@ -37,9 +37,7 @@ class HomuGetter
     # zones = zones[3..-2]
     @blocks = []
     zones.each do |z|
-      # puts '====='
-      # puts z
-      if z.match /(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d:\d\d)\sID:(.{0,})\sNo.([\d]+)/
+      if z.match /(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d)\sID:(.{0,})/
         @blocks << Nokogiri::HTML(z)
       end
     end
