@@ -53,8 +53,6 @@ class HomuBlockParser
     datas.push(matched[2]) # time
     datas.push(matched[5]) # id
     datas.push(dialog.css('span.qlink').text.split('.')[1])
-    puts matched
-    puts dialog.css('div.quote').text if matched[2].match /\d\d:\d\d:\d\d/
     return Detail.new datas
   end
 
