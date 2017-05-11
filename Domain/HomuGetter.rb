@@ -8,7 +8,7 @@ class HomuGetter
   attr_writer :board
 
   def initialize
-    @page_url = 'http://rem.komica.org/'
+    @page_url = 'http://rem.komica2.net/'
     @archive_url = 'http://archive.komica.org/'
     @res_url = '/pixmicat.php?res='
     @board = '00'
