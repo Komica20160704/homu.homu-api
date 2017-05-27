@@ -11,6 +11,7 @@ get '/' do
 end
 
 get '/page/:page' do |page|
+  headers 'Access-Control-Allow-Origin': '*'
   begin
     return JSON.pretty_generate(HomuAPI.GetPage(page))
   rescue OpenURI::HTTPError
@@ -20,6 +21,7 @@ get '/page/:page' do |page|
 end
 
 get '/res/:no' do |no|
+  headers 'Access-Control-Allow-Origin': '*'
   begin
     res = HomuAPI.GetRes(no, :archive => params['archive'])
     return JSON.pretty_generate(res)
