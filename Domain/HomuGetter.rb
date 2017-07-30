@@ -17,9 +17,10 @@ class HomuGetter
 
   def DownloadPage page
     page = 'index' if page == '0'
-    url = @isGetfromArchive ? @archive_url : @page_url
-    puts 'DownloadPage: ' + url + @board + '/' + page.to_s + '.htm'
-    @html = Nokogiri::HTML(open(url + @board + '/' + page.to_s + '.htm').read)
+    host = @isGetfromArchive ? @archive_url : @page_url
+    url = host + @board + '/pixmicat.php?page_num=' + page.to_i.to_s
+    puts 'DownloadPage: ' + url
+    @html = Nokogiri::HTML(open(url).read)
   end
 
   def DownloadRes no

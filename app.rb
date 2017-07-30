@@ -57,6 +57,10 @@ get '/api' do
   erb :api
 end
 
+get '/task/20170730' do
+  erb :task
+end
+
 # require './game.rb'
 
 post '/test' do
