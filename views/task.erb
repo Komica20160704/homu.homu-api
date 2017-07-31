@@ -999,7 +999,7 @@
 %>
 <link rel="stylesheet" type="text/css" href="http://rem.komica2.net/common/css/mainstyle.css"/>
 <h1>今日 沒人理你 一覽</h1>
-<span style="float: right">最近可能的更新時間: <%= File.new(__FILE__).mtime %></span>
+<span style="float: right">最近可能的更新時間: <%= File.new(__FILE__).mtime.utc.localtime('+08:00') %></span>
 <hr>
 <% posts.each do |post| %>
 <%= erb :post, :locals => { :post => post } %><hr>
