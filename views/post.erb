@@ -13,6 +13,8 @@
     <span class="rlink">[<a href="http://rem.komica2.net/00/pixmicat.php?res=<%= post[:No] %>">回應</a>]</span>
   </div>
   <div class="quote">
-    <%= post[:Content].split('\n').join('<br>') %>
+    <% post[:Content].split("\n").each do |line| %>
+      <%= line %><br>
+    <% end %>
   </div>
 </div>

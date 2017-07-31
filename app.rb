@@ -57,7 +57,7 @@ get '/api' do
   erb :api
 end
 
-get '/task/20170730' do
+get '/task' do
   erb :task
 end
 
