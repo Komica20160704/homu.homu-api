@@ -1,6 +1,6 @@
 require './app'
 
-pages = 2..99
+pages = 3..99
 stop_next_page = false
 bads = []
 
@@ -17,4 +17,4 @@ pages.each do |page|
   end
 end
 
-File.write('./task.json', JSON.pretty_generate(bads))
+File.write('./task.json', bads.to_s)
