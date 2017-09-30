@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>AIPs - Homu</title>
+  <link rel="stylesheet" type="text/css" href="/game.css">
+</head>
+
+<body>
+  <div class="block" style="padding-left:20px;padding-bottom:20px;width:500px;margin:auto;">
+    <h1>本站的相關API</h1>
+    <h2>1. 取得頁面內容</h2>
+    url: /page/[頁碼]<br>
+    return: [{"Head":{...}, Bodies:[{...}, {...} ,...]}, ...]<br>
+    <h2>2. 取得討論串</h2>
+    url: /res/[討論串編號]<br>
+    return: {"Head":{...}, Bodies:[{...}, {...} ,...]}<br>
+    option: ?archive=true<br>
+    <br>
+    Head: 討論串串頭<br>
+    Body: 討論串的回應<br>
+    <br>
+    單一Head或Body會包含<br>
+    "Title": "標題",<br>
+    "Name": "名稱",<br>
+    "Date": "YY/MM/DD",<br>
+    "Time": "hh:mm:ss",<br>
+    "Id": "GSc6yPvI",<br>
+    "No": "7825079",<br>
+    "Picture": "1463971399357.jpg", // 沒圖片不會有此項<br>
+    "Hidenbodycount": "2", // 非Head或回應數過少不會有此項<br>
+    "Content": "內文"<br>
+    <br>
+    <a href='./'>Back</a>
+  </div>
+</body>
+
+</html>

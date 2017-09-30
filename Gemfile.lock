@@ -1,0 +1,40 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    daemons (1.2.4)
+    eventmachine (1.2.5)
+    eventmachine (1.2.5-x86-mingw32)
+    json (2.1.0)
+    mini_portile2 (2.3.0)
+    mustermann (1.0.1)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.1-x86-mingw32)
+      mini_portile2 (~> 2.3.0)
+    rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
+    thin (1.7.2)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
+    tilt (2.0.8)
+
+PLATFORMS
+  ruby
+  x86-mingw32
+
+DEPENDENCIES
+  json
+  nokogiri
+  rack
+  sinatra
+  thin
+
+BUNDLED WITH
+   1.16.0.pre.2

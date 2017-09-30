@@ -1,0 +1,167 @@
+<%
+  require './Domain/HomuAPI'
+  res = HomuAPI.GetRes @ref_no, :archive => params['archive']
+  url = params['archive'].nil? ? 'http://rem.komica2.net/00/src/' : 'http://archive.komica.org/00/src/'
+%>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Read Comic - 綜合 - Komica</title>
+  <style>
+    html {
+      width: 99%;
+    }
+    body {
+      width: 100%;
+      background-color: rgb(255, 255, 238);
+      color: rgb(128, 0, 0);
+    }
+    .dialog {
+      margin:auto;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      display: inline-block;
+      background-color: rgb(240, 224, 214);
+    }
+    .page_button {
+      width: 50%;
+      position: absolute;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript">
+    var res = <%= res.to_json %>;
+    var img_url = "<%= url %>";
+    var index = -1;
+    var weekday = [ "日", "一", "二", "三", "四", "五", "六" ]
+
+    function LoadImg(block) {
+      if (block.Picture) {
+        LoadPage(GetImgURL(block.Picture));
+      } else {
+        if ($("#page_img")[0].src.match("no_pic\.jpg")) {
+          return;
+        } else {
+          LoadPage("../no_pic.jpg");
+        }
+      };
+    }
+
+    function PreLoadImg(block) {
+      if (block && block.Picture) {
+        PreLoadPage(GetImgURL(block.Picture));
+      } else {
+        PreLoadPage("../no_pic.jpg");
+      };
+    }
+
+    function LoadPage(img) {
+      $("#page_loading").css("display", "block");
+      $("#page_img").css("display", "none");
+      $("#page_img")[0].src = img;
+    }
+
+    function PreLoadPage(img) {
+      $("#page_preload")[0].src = img;
+    }
+
+    function LoadDialog(id, block) {
+      $(id).css("width", "");
+      $(id).css("display", "inline-block");
+      var then = new Date("20" + block.Date);
+      var theday = then.getDay();
+      dialog_title.children[0].innerText = block.Title
+      dialog_name.children[0].innerText = block.Name
+      var data = block.Date + "(" + weekday[theday] + ")" + block.Time + " ID:" + block.Id + " No." + block.No;
+      dialog_data.innerText = data
+      dialog_content.innerText = block.Content
+      $(id).css("width", (dialog.clientWidth - 19) + "px");
+      $(id).css("display", "block");
+    }
+
+    function GetImgURL(pic) {
+      return img_url + pic;
+    }
+
+    function LoadHead() {
+      LoadImg(res.Head);
+      LoadDialog("#dialog", res.Head);
+      PreLoadImg(res.Bodies[0]);
+    }
+
+    function LoadBody(index) {
+      LoadImg(res.Bodies[index]);
+      LoadDialog("#dialog", res.Bodies[index]);
+      PreLoadImg(res.Bodies[index + 1]);
+    }
+
+    function OnPageImgLoad() {
+      $(this).css("width", "");
+      var width = $(this).width();
+      if (width > Math.ceil(window.screen.width * 0.9)) {
+        width = Math.ceil(window.screen.width * 0.9);
+        $("#page_img").css("width", width + "px");
+      }
+      $("#page_img").css("display", "block");
+      $("#page_loading").css("display", "none");
+      $("#page_container").css("width", width + "px");
+      $(".page_button").css("height", $(this).height() + "px");
+    }
+
+    function PrePage() {
+      if (index > -1) {
+        index--;
+        if (index == -1) {
+          LoadHead();
+        } else {
+          LoadBody(index);
+        }
+      };
+    }
+
+    function NextPage() {
+      if (index < res.Bodies.length - 1) {
+        index++;
+        LoadBody(index);
+      } else {
+        alert("沒有下一張了");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <p id="head_bar" align="center">
+    <font size="5"><b><span>綜合</span></b></font>
+  </p>
+  <hr width="90%" size="1">
+  <div style="width:100%;">
+    <div id="page_btn_l" class="page_button" style="left:50%;" onclick="NextPage();"></div>
+    <div id="page_btn_r" class="page_button" onclick="PrePage();"></div>
+    <div id="page_loading" style="display:none;" align="center"><font color="#cc1105" size="+1"><b>圖片讀取中</b></font></div>
+    <div id="page_container" style="margin:auto;">
+      <img id="page_img" alt="No Picture!">
+    </div>
+    <div style="display:none;"><img id="page_preload"></div>
+  </div>
+  <hr>
+  <div id="dialog" class="dialog" style="">
+    <font id="dialog_title" color="#cc1105" size="+1"><b></b></font>
+    <font id="dialog_name" color="#117743"><b></b></font>
+    <font id="dialog_data"></font>
+    <blockquote id="dialog_content"></blockquote>
+  </div>
+  [<a href='/read/<%= res['Head']['No'] %>'>離開畫廊檢視</a>]
+</body>
+
+<script type="text/javascript">
+  $("#page_img").load(OnPageImgLoad);
+  LoadHead();
+</script>
+
+</html>
