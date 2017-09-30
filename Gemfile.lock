@@ -11,6 +11,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     nokogiri (1.8.1-x86-mingw32)
       mini_portile2 (~> 2.3.0)
+    puma (3.10.0)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -32,6 +33,7 @@ PLATFORMS
 DEPENDENCIES
   json
   nokogiri
+  puma
   sinatra
   thin
 
