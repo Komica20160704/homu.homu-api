@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'open-uri'
+require 'timeout'
 require 'nokogiri'
 require './Domain/Exception/PageNotFoundException'
 
@@ -20,14 +21,18 @@ class HomuGetter
     host = @isGetfromArchive ? @archive_url : @page_url
     url = host + @board + '/pixmicat.php?page_num=' + page.to_i.to_s
     puts 'DownloadPage: ' + url
-    @html = Nokogiri::HTML(open(url, read_timeout: 3).read)
+    Timeout.timeout 3 do
+      @html = Nokogiri::HTML(open(url).read)
+    end
   end
 
   def DownloadRes no
     url = @isGetfromArchive ? @archive_url : @page_url
     res_url = url + @board + @res_url + no.to_s
     puts 'DownloadRes: ' + res_url
-    @html = Nokogiri::HTML(open(res_url, read_timeout: 3).read)
+    Timeout.timeout 3 do
+      @html = Nokogiri::HTML(open(res_url).read)
+    end
   end
 
   def CutHtml
