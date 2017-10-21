@@ -20,33 +20,20 @@ class HomuGetter
     host = @isGetfromArchive ? @archive_url : @page_url
     url = host + @board + '/pixmicat.php?page_num=' + page.to_i.to_s
     puts 'DownloadPage: ' + url
-    @html = Nokogiri::HTML(open(url).read)
+    @html = Nokogiri::HTML(open(url, read_timeout: 3).read)
   end
 
   def DownloadRes no
     url = @isGetfromArchive ? @archive_url : @page_url
-    puts 'DownloadRes: ' + url + @board + @res_url + no.to_s
-    @html = Nokogiri::HTML(open(url + @board + @res_url + no.to_s).read)
+    res_url = url + @board + @res_url + no.to_s
+    puts 'DownloadRes: ' + res_url
+    @html = Nokogiri::HTML(open(res_url, read_timeout: 3).read)
   end
 
   def CutHtml
     @html.search('br').each do |n| n.replace("\n") end
-    # @html.search('hr').each do |n| n.replace('<sprate>sprate</sprate>') end
     @html.search('font').each do |n| n = n.text if n['color'] == '789922' end
-    # @main_form = @isGetfromArchive ? @html.xpath("//html//body//div")[1] : @html.xpath("//html//form")[1]
-    # zones = @html.to_s.split '<sprate>sprate</sprate>'
-    # zones = zones[3..-2]
-    # @blocks = []
-    # zones.each do |z|
-    #   if z.match /(\d\d\/\d\d\/\d\d)\(.\)(\d\d:\d\d)\sID:(.{0,})/
-    #     @blocks << Nokogiri::HTML(z)
-    #   end
-    # end
     @blocks = @html.css('.thread')
-    # @main_form = @html
-    # raise PageNotFoundException if @main_form.nil?
-    # make_blocks
-    # save_contents
   end
 
   def Blocks
