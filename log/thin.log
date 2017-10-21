@@ -1,0 +1,150 @@
+Writing PID to tmp/pids/thin.pid
+Using rack adapter
+Thin web server (v1.7.2 codename Bachmanity)
+Maximum connections set to 1024
+Listening on 0.0.0.0:80, CTRL+C to stop
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+127.0.0.1 - - [30/Sep/2017:18:00:39 +0000] "GET / HTTP/1.1" 200 5482 0.7901
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:03:59 +0000] "GET / HTTP/1.1" 200 5378 0.6097
+1.160.244.105 - - [30/Sep/2017:18:04:00 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 0.0016
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9961509
+1.160.244.105 - - [30/Sep/2017:18:04:02 +0000] "GET /read/9961509 HTTP/1.1" 200 18082 0.4094
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962065
+1.160.244.105 - - [30/Sep/2017:18:04:06 +0000] "GET /read/9962065 HTTP/1.1" 200 24152 0.4254
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:05:20 +0000] "GET / HTTP/1.1" 200 5368 0.6714
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9963077
+1.160.244.105 - - [30/Sep/2017:18:05:22 +0000] "GET /read/9963077 HTTP/1.1" 200 53686 0.6201
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:05:25 +0000] "GET / HTTP/1.1" 200 5368 0.6295
+1.160.244.105 - - [30/Sep/2017:18:08:37 +0000] "GET /api HTTP/1.1" 200 1079 0.0023
+1.160.244.105 - - [30/Sep/2017:18:08:37 +0000] "GET /game.css HTTP/1.1" 200 441 0.0011
+1.160.244.105 - - [30/Sep/2017:18:08:37 +0000] "GET /favicon.ico HTTP/1.1" 304 - 0.0004
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:08:40 +0000] "GET / HTTP/1.1" 200 5395 0.7599
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=2
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+1.160.244.105 - - [30/Sep/2017:18:08:55 +0000] "GET /?page=1 HTTP/1.1" 200 5377 0.6028
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=3
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=2
+1.160.244.105 - - [30/Sep/2017:18:08:56 +0000] "GET /?page=2 HTTP/1.1" 200 5320 0.4796
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=2
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+1.160.244.105 - - [30/Sep/2017:18:08:57 +0000] "GET /?page=1 HTTP/1.1" 200 5377 0.6037
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=2
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+1.160.244.105 - - [30/Sep/2017:18:08:58 +0000] "GET /?page=1 HTTP/1.1" 200 5377 0.5985
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:08:59 +0000] "GET /?page=0 HTTP/1.1" 200 5395 0.5861
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:25:22 +0000] "GET / HTTP/1.1" 200 5192 0.5501
+1.160.244.105 - - [30/Sep/2017:18:25:22 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 0.0005
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:18:36:17 +0000] "GET / HTTP/1.1" 200 5253 0.6962
+1.160.244.105 - - [30/Sep/2017:18:36:18 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 0.0007
+Invalid request: Invalid HTTP format, parsing fails.
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/request.rb:84:in `execute'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/request.rb:84:in `parse'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/connection.rb:39:in `receive_data'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/eventmachine-1.2.5/lib/eventmachine.rb:194:in `run_machine'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/eventmachine-1.2.5/lib/eventmachine.rb:194:in `run'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/backends/base.rb:73:in `start'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/server.rb:162:in `start'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/controllers/controller.rb:87:in `start'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/runner.rb:203:in `run_command'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/lib/thin/runner.rb:159:in `run!'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/gems/thin-1.7.2/bin/thin:6:in `<top (required)>'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/bin/thin:22:in `load'
+	/home/mickplayer/.rvm/gems/ruby-2.4.1/bin/thin:22:in `<main>'
+
+82.19.131.63 - - [30/Sep/2017:18:47:33 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:18:49:33 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:18:51:34 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:18:53:35 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:18:55:35 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:18:57:36 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:18:59:37 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:01:37 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:19:03:38 +0000] "POST / HTTP/1.1" 404 18 0.0005
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:04:46 +0000] "GET / HTTP/1.1" 200 5365 0.6583
+1.160.244.105 - - [30/Sep/2017:19:04:47 +0000] "GET /favicon.ico HTTP/1.1" 304 - 0.0005
+82.19.131.63 - - [30/Sep/2017:19:05:38 +0000] "POST / HTTP/1.1" 404 18 0.0011
+82.19.131.63 - - [30/Sep/2017:19:07:39 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:09:40 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:11:40 +0000] "POST / HTTP/1.1" 404 18 0.0005
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:13:06 +0000] "GET / HTTP/1.1" 200 5497 0.6070
+82.19.131.63 - - [30/Sep/2017:19:13:41 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:15:41 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:17:42 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:19:43 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:21:43 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:23:44 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:25:45 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:19:27:45 +0000] "POST / HTTP/1.1" 404 18 0.0004
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:29:37 +0000] "GET / HTTP/1.1" 200 5527 0.7300
+1.160.244.105 - - [30/Sep/2017:19:29:37 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 0.0006
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962596
+1.160.244.105 - - [30/Sep/2017:19:29:40 +0000] "GET /read/9962596 HTTP/1.1" 200 17440 0.3018
+82.19.131.63 - - [30/Sep/2017:19:29:46 +0000] "POST / HTTP/1.1" 404 18 0.0004
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:29:56 +0000] "GET / HTTP/1.1" 200 5527 0.6621
+82.19.131.63 - - [30/Sep/2017:19:31:46 +0000] "POST / HTTP/1.1" 404 18 0.0004
+82.19.131.63 - - [30/Sep/2017:19:33:47 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:35:48 +0000] "POST / HTTP/1.1" 404 18 0.0005
+82.19.131.63 - - [30/Sep/2017:19:37:48 +0000] "POST / HTTP/1.1" 404 18 0.0005
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:44:47 +0000] "GET / HTTP/1.1" 200 5550 0.7602
+1.160.244.105 - - [30/Sep/2017:19:44:48 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 0.0005
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:50:03 +0000] "GET / HTTP/1.1" 200 5482 0.5170
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962612
+1.160.244.105 - - [30/Sep/2017:19:50:14 +0000] "GET /read/9962612 HTTP/1.1" 200 18617 0.2777
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962612
+1.160.244.105 - - [30/Sep/2017:19:50:24 +0000] "GET /read/9962612 HTTP/1.1" 200 18617 0.2744
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:50:27 +0000] "GET / HTTP/1.1" 200 5482 0.5750
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:50:44 +0000] "GET / HTTP/1.1" 200 5482 0.5123
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962122
+1.160.244.105 - - [30/Sep/2017:19:50:46 +0000] "GET /read/9962122 HTTP/1.1" 200 7544 0.3895
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:50:50 +0000] "GET / HTTP/1.1" 200 5482 0.6006
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:50:55 +0000] "GET / HTTP/1.1" 200 5482 0.5103
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:51:35 +0000] "GET / HTTP/1.1" 200 5467 0.5981
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962596
+1.160.244.105 - - [30/Sep/2017:19:51:37 +0000] "GET /read/9962596 HTTP/1.1" 200 18683 0.2728
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:57:39 +0000] "GET / HTTP/1.1" 200 5494 0.7394
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9962596
+1.160.244.105 - - [30/Sep/2017:19:57:44 +0000] "GET /read/9962596 HTTP/1.1" 200 18683 0.2811
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=1
+DownloadPage: http://rem.komica2.net/00/pixmicat.php?page_num=0
+1.160.244.105 - - [30/Sep/2017:19:58:06 +0000] "GET / HTTP/1.1" 200 5494 0.5797
+DownloadRes: http://rem.komica2.net/00/pixmicat.php?res=9963808
+1.160.244.105 - - [30/Sep/2017:19:58:10 +0000] "GET /read/9963808 HTTP/1.1" 200 3511 0.3966
