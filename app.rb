@@ -4,6 +4,8 @@ require 'json'
 require 'open-uri'
 require './Domain/HomuAPI'
 
+set :show_exceptions, false if settings.environment == 'production'
+
 get '/' do
   @page = params['page']
   @page = '0' if @page.nil?
