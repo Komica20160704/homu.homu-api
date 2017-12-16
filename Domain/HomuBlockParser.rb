@@ -48,7 +48,6 @@ class HomuBlockParser
     datas = ['nil']
     datas.push(dialog.css('span.title').text)
     datas.push(dialog.css('span.name').text)
-    raise dialog.css('span.now').text
     parse = /((\d\d\d\d\/\d\d\/\d\d)|(\d\d\/\d\d\/\d\d))\s*\(.\)\s*((\d\d:\d\d:\d\d\.\d\d\d)|(\d\d:\d\d:\d\d\.\d\d)|(\d\d:\d\d:\d\d)|(\d\d:\d\d))\s*ID:(.{8})/
     matched = dialog.css('span.now').text.match parse
     datas.push(matched[1]) # date
