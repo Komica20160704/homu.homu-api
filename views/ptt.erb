@@ -31,7 +31,7 @@
       end
       text += " </span><span class='f3 hl push-userid'>#{body['Id']}</span>"
       text += "<span class='f3 push-content'>: #{body_line line}</span>"
-      text += "<span class='push-ipdatetime'>#{body['Date'][3..7]} #{body['Time'][0..4]}</span>"
+      text += "<span class='push-ipdatetime'>#{body['Date'][5..9]} #{body['Time'][0..4]}</span>"
       text += "</div>"
     end
     return text
