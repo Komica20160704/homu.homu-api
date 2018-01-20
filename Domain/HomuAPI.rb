@@ -25,16 +25,16 @@ class HomuAPI
   def self.Verify params
     begin
       res = HomuAPI.GetRes(params['number'])
-    rescue PageNotFoundException
-      raise Exception.new("找不到討論串")
+    rescue OpenURI::HTTPError
+      raise Exception.new('找不到討論串')
     end
     res['Bodies'] << res['Head']
     target = res['Bodies'].find do |block|
       block['No'] == params['no']
     end
-    raise Exception.new("找不到文章") if target.nil?
-    raise Exception.new("Id錯誤") if target['Id'] != params['id']
-    raise Exception.new("密碼不能空白") if params['pwd'] == '' or params['password'] == ''
+    raise Exception.new('找不到文章') if target.nil?
+    raise Exception.new('Id錯誤') if target['Id'] != params['id']
+    raise Exception.new('密碼不能空白') if params['pwd'] == '' or params['password'] == ''
     homuPoster = HomuPoster.new
     homuPoster.PostDeletion params['no'], params['pwd']
   end

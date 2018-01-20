@@ -42,9 +42,6 @@ class HomuBlockParser
   end
 
   def match_detail dialog
-    # format = @isGetfromArchive ? @detail_format_a : @detail_format
-    # matched = dialog.match format
-    # dialog.sub! matched[0], ''
     datas = ['nil']
     datas.push(dialog.css('span.title').text)
     datas.push(dialog.css('span.name').text)
@@ -58,12 +55,6 @@ class HomuBlockParser
   end
 
   def match_picture dialog
-    # format = @isGetfromArchive ? @picture_format_a : @picture_format
-    # matched = dialog.match format
-    # if matched
-    #   dialog.sub! matched[0], ''
-    #   return matched[1]
-    # end
     matched = dialog.css('div.file-text a').text
     if matched.strip != ''
       return matched
@@ -72,10 +63,6 @@ class HomuBlockParser
   end
 
   def match_content dialog
-    # matched = dialog.match @content_format
-    # dialog.sub! matched[0], ''
-    # content = JSON.parse matched[0]
-    # return @contents[content['Head']][content['Body']]
     matched = dialog.css('div.quote').text
     if matched
       return matched.strip
@@ -84,13 +71,6 @@ class HomuBlockParser
   end
 
   def match_hiden_body dialog
-    # matched = dialog.match @hiden_body_format
-    # if matched
-    #   dialog.sub! matched[0], ''
-    #   return matched[1]
-    # end
-    # return nil
-
     matched = dialog.css('span.warn_txt2').text.match(/有回應\s(\d+)\s篇被省略。要閱讀所有回應請按下回應連結。/)
     if matched
       return matched[1]

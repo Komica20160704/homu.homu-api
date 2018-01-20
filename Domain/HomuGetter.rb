@@ -2,7 +2,6 @@
 require 'open-uri'
 require 'timeout'
 require 'nokogiri'
-require './Domain/Exception/PageNotFoundException'
 
 class HomuGetter
   attr_writer :isGetfromArchive
@@ -62,7 +61,7 @@ class HomuGetter
   end
 
   def make_block children
-    block_node = Nokogiri::XML::Node.new "block", @main_form
+    block_node = Nokogiri::XML::Node.new 'block', @main_form
     block = []
     while children.size > 0
       c = children.delete_at 0
