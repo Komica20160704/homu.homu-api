@@ -1,4 +1,2 @@
-map('/') do
-  require './app'
-  run Sinatra::Application
-end
+require './app'
+run Sinatra::Application
