@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    daemons (1.2.4)
+    daemons (1.2.6)
     eventmachine (1.2.5)
     eventmachine (1.2.5-x86-mingw32)
     json (2.1.0)
@@ -37,4 +37,4 @@ DEPENDENCIES
   thin
 
 BUNDLED WITH
-   1.16.0.pre.2
+   1.16.1
