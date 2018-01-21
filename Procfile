@@ -1,1 +1,1 @@
-app: rvmsudo thin start -p3000 -d -eproduction
+app: rvmsudo bundle exec thin start -p3000 -d -eproduction
