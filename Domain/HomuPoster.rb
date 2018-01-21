@@ -4,13 +4,13 @@ require 'net/http'
 
 class HomuPoster
   def PostNew params
-    uri = URI('http://rem.komica2.net/00/index.php')
+    uri = URI('https://rem.komica2.net/00/index.php')
     https = Net::HTTP.new(uri.host, uri.port)
     puts https.post(uri.path, get_post_body(params)).body
   end
 
   def PostDeletion no, pwd
-    uri = URI('http://rem.komica2.net/00/index.php')
+    uri = URI('https://rem.komica2.net/00/index.php')
     https = Net::HTTP.new(uri.host, uri.port)
     post_body = get_post_body({ no: 'delete', mode: 'usrdel', pwd: pwd })
     result = https.post(uri.path, post_body).body

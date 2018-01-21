@@ -64,17 +64,17 @@
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='http://web.komica.org/' target='_blank'>KOMICA</a> - <a href='http://rem.komica2.net/00/index.htm' target="_blank">綜合</a> - <a href='../'>討論串列表</a> - <%= head['No']%></span> <a class='jsbtn' onclick='goBottom()'>[到達底端]</a> <a class='jsbtn' onclick='goTop()'>[回到頂端]</a> <a class='jsbtn' href='../comic/<%= head['No']%>'>[畫廊檢視]</a></div></div>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='https://web.komica.org/' target='_blank'>KOMICA</a> - <a href='https://rem.komica2.net/00/index.htm' target="_blank">綜合</a> - <a href='../'>討論串列表</a> - <%= head['No']%></span> <a class='jsbtn' onclick='goBottom()'>[到達底端]</a> <a class='jsbtn' onclick='goTop()'>[回到頂端]</a> <a class='jsbtn' href='../comic/<%= head['No']%>'>[畫廊檢視]</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%=head['Id']%>(<%=head['Name']%>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%=head['Title']%></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%=head['Date']%> <%=head['Time']%></span></div>
-<%if head['Picture']%><a href="http://p2.komica.ml/00/src/<%= head['Picture']%>" target="_blank"><img src="http://p2.komica.ml/00/thumb/<%= small_picture head['Picture']%>"></a><%end%><span>
+<%if head['Picture']%><a href="https://p2.komica.ml/00/src/<%= head['Picture']%>" target="_blank"><img src="https://p2.komica.ml/00/thumb/<%= small_picture head['Picture']%>"></a><%end%><span>
 
 <%= head['Content']%>
 
 
 --</span>
 <span class="f2">※ 發信站: KOMICA, No.<%= head['No']%>
-</span><span class="f2">※ 文章網址: <a href="http://rem.komica2.net/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">http://rem.komica2.net/00/index.php?res=<%= head['No']%></a>
-</span><% bodies.each do |body| %><%= write_body body %><%if body['Picture']%><a href="http://p2.komica.ml/00/src/<%= body['Picture']%>" target="_blank"><img src="http://p2.komica.ml/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div><div id="jump_to_me">bottom</div>
+</span><span class="f2">※ 文章網址: <a href="https://rem.komica2.net/00/index.php?res=<%= head['No']%>" target="_blank" rel="nofollow">https://rem.komica2.net/00/index.php?res=<%= head['No']%></a>
+</span><% bodies.each do |body| %><%= write_body body %><%if body['Picture']%><a href="https://p2.komica.ml/00/src/<%= body['Picture']%>" target="_blank"><img src="https://p2.komica.ml/00/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div><div id="jump_to_me">bottom</div>
 
 </body>
 </html>
