@@ -6,18 +6,18 @@ GEM
     eventmachine (1.2.5-x86-mingw32)
     json (2.1.0)
     mini_portile2 (2.3.0)
-    mustermann (1.0.1)
+    mustermann (1.0.2)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     nokogiri (1.8.1-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     rack (2.0.3)
-    rack-protection (2.0.0)
+    rack-protection (2.0.1)
       rack
-    sinatra (2.0.0)
+    sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0)
+      rack-protection (= 2.0.1)
       tilt (~> 2.0)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
@@ -33,7 +33,7 @@ DEPENDENCIES
   json
   nokogiri
   rack
-  sinatra
+  sinatra (>= 2.0.1)
   thin
 
 BUNDLED WITH
