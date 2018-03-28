@@ -9,6 +9,7 @@ development:
 
 production:
   <<: *default
+  host: 127.0.0.1
   database: homu_production
   username: homu
   password: <%= ENV['HOMU_DATABASE_PASSWORD'] %>
