@@ -3,13 +3,21 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'json'
 require 'open-uri'
-require './Domain/HomuAPI'
+require './lib/homu_api'
 
-set :show_exceptions, false if settings.environment == 'production'
+set :show_exceptions, false if production?
+set :default_timeout, 30 if development?
+set :root, File.dirname(__FILE__)
 
 get '/' do
-  @page = params['page']
-  @page = '0' if @page.nil?
+  @page = params['page'].to_i
+  pages = []
+  threads = (@page..(@page + 1)).map do |page|
+    Thread.new { pages << HomuApi.get_page(page, timeout: settings.default_timeout) }
+  end
+  threads.each &:join
+  blocks = pages.flatten.compact.reverse!
+  @heads = blocks.map { |block| block['Head'] }
   erb :ptt_index
 end
 
@@ -17,7 +25,7 @@ get '/page/:page' do |page|
   headers 'Access-Control-Allow-Origin' => '*'
   content_type :json
   begin
-    return HomuAPI.GetPage(page).to_json
+    return HomuApi.get_page(page).to_json
   rescue OpenURI::HTTPError
     status 404
     return { success: 0, message: '找不到此討論串' }.to_json
@@ -28,7 +36,7 @@ get '/res/:no' do |no|
   headers 'Access-Control-Allow-Origin' => '*'
   content_type :json
   begin
-    return HomuAPI.GetRes(no, archive: params['archive']).to_json
+    return HomuApi.get_res(no, archive: params['archive']).to_json
   rescue OpenURI::HTTPError
     status 404
     return { success: 0, message: '找不到此討論串' }.to_json

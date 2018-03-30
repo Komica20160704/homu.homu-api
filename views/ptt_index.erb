@@ -1,25 +1,4 @@
 <%
-  require './Domain/HomuAPI'
-
-  pages = []
-  threads = []
-  (@page.to_i..(@page.to_i + 1)).each do |i|
-    threads << Thread.new {
-      pages[i - @page.to_i] = HomuAPI.GetPage(i.to_s, { :board => @board, :archive => params['archive']})
-    }
-  end
-  threads.each do |t|
-    t.join
-  end
-
-  heads = []
-  pages.each do |page|
-    page.each do |block|
-      heads << block['Head']
-    end
-  end
-  heads.reverse!
-
   def small_picture picture
     s = picture.split('.')
     return s[0] + 's.jpg'
@@ -28,14 +7,18 @@
   def get_puch_count count
     i = count.to_i
     if count.nil?
-      return "  "
+      return "    "
     elsif i < 10
-      return "<span class=\"f2 hl\"> #{count}</span>"
+      return "<span class=\"f2 hl\">   #{count}</span>"
     elsif i >= 10 && i < 100
-      return "<span class=\"f3 hl\">#{count}</span>"
+      return "<span class=\"f3 hl\">  #{count}</span>"
     elsif i >= 100
-      return "<span class=\"f1 hl\">爆</span>"
+      return "<span class=\"f1 hl\">  爆</span>"
     end
+  end
+
+  def get_date date
+    date[-5..-1].to_s.rjust(5).sub(/^0/, ' ')
   end
 
   def get_n_bytes_string n, string
@@ -80,7 +63,7 @@
 <div id="main-container">
 <div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='https://web.komica.org/' target='_blank'>KOMICA</a> - <a href='https://ram.komica2.net/00/index.htm' target="_blank">綜合</a> - 討論串列表</span><a href='./api' style="float:right">APIs</a> <a href='https://homu-api.herokuapp.com/' style="float:right">即時綜合</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><span class='f0 b7'>   編號    日 期 作  者   文  章  標  題                                                            </span>
-<% heads.each do |head| %><span><%= head['No'][1..7] %> <%= get_puch_count head['Hidenbodycount']%> <%= head['Date'][5..9]%> <%= head['Id']%> <%= get_title head%></span>
+<% @heads.each do |head| %><span><%= head['No'][1..7].rjust(7) %><%= get_puch_count head['Hidenbodycount'] %><%= get_date head['Date'] %> <%= head['Id']%> <%= get_title head%></span>
 <% end %><span>
 </span><span class='f0 hl'><% if @page == '0' %>最前頁<% else %><a href='./?page=<%=@page.to_i - 1%>'>上一頁</a><% end %> <% (0..9).each do |i| %><% if @page == i.to_s %>[<%=i%>]<% else %><a href='./?page=<%=i%>'>[<%=i%>]</a><% end %><% end %> <% if @page == '9' %>最後頁<% else %><a href='./?page=<%=@page.to_i + 1%>'>下一頁</a><% end %></span>
 </div>
