@@ -6,7 +6,7 @@ require 'open-uri'
 require './lib/homu_api'
 
 set :show_exceptions, false if production?
-set :default_timeout, 30 if development?
+set :default_timeout, development? ? 30 : 3
 set :root, File.dirname(__FILE__)
 
 get '/' do
