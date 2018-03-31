@@ -1,19 +1,18 @@
 require './lib/hosts/const'
 
 module Hosts
-  class TemporaryHomu
+  class Homu
     def initialize
-      @host_url = 'https://rem.komica.org/00test/'
+      @host_url = Const::HOMU_INDEX
       @page_url = '.htm?'
       @res_url = '/pixmicat.php?res='
     end
 
-    # https://rem.komica.org/00test/index.htm?
     def page page
+      page = 'index' if page.to_s == '0'
       "#{@host_url}#{page}#{@page_url}"
     end
 
-    # https://rem.komica.org/00test/pixmicat.php?res=847563
     def res no
       "#{@host_url}#{@res_url}#{no}"
     end

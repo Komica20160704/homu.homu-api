@@ -2,30 +2,23 @@
 require 'open-uri'
 require 'timeout'
 require 'nokogiri'
-require './lib/hosts/temporary_homu'
+require './lib/hosts/homu'
 
 class HomuGetter
   attr_reader :blocks, :contents
 
   def initialize
-    # @host_url = 'https://ram.komica2.net/'
-    # @page_url = '/pixmicat.php?page_num='
-    # @res_url = '/pixmicat.php?res='
-    # @board = '00'
     @timeout = 3
-    @host = Hosts::TemporaryHomu.new
+    @host = Hosts::Homu.new
   end
 
   def download_page page
-    page = 'index' if page.to_s == '0'
-    # url = "#{host}#{@board}#{@page_url}#{page}"
     url = @host.page(page)
     puts "DownloadPage: #{url}"
     get_html url
   end
 
   def download_res no
-    # url = "#{host}#{@board}#{@res_url}#{no.to_i}"
     url = @host.res(no)
     puts "DownloadRes: #{url}"
     get_html url
