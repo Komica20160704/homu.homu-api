@@ -1,3 +1,5 @@
+require './lib/hosts/const'
+
 module Hosts
   class TemporaryHomu
     def initialize

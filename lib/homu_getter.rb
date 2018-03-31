@@ -7,15 +7,12 @@ require './lib/hosts/temporary_homu'
 class HomuGetter
   attr_reader :blocks, :contents
 
-  def initialize archive: nil, timeout: nil
-    @host_url = 'https://ram.komica2.net/'
-    @archive_url = 'https://archive.komica.org/'
-    @page_url = '/pixmicat.php?page_num='
-    @res_url = '/pixmicat.php?res='
-    @board = '00'
-    @from_archive = !archive.nil?
-    @timeout = timeout || 3
-
+  def initialize
+    # @host_url = 'https://ram.komica2.net/'
+    # @page_url = '/pixmicat.php?page_num='
+    # @res_url = '/pixmicat.php?res='
+    # @board = '00'
+    @timeout = 3
     @host = Hosts::TemporaryHomu.new
   end
 
@@ -35,7 +32,7 @@ class HomuGetter
   end
 
   def host
-    @from_archive ? @archive_url : @host_url
+    @host_url
   end
 
   private

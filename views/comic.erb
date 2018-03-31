@@ -1,7 +1,7 @@
 <%
-  require './libhomu_api'
-  res = HomuApi.get_res @ref_no, :archive => params['archive']
-  url = params['archive'].nil? ? 'https://ram.komica2.net/00/src/' : 'https://archive.komica.org/00/src/'
+  require './lib/homu_api'
+  res = HomuApi.get_res @ref_no
+  url = "#{Hosts::Const::HOMU_IMAGE}/src/"
 %>
 
 <!DOCTYPE html>
