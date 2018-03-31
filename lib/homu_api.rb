@@ -3,16 +3,16 @@ require './lib/homu_getter'
 require './lib/homu_block_parser'
 
 class HomuApi
-  def self.get_page page_number, options = {}
-    homu_getter = HomuGetter.new options
+  def self.get_page page_number
+    homu_getter = HomuGetter.new
     homu_getter.download_page page_number
     do_parse homu_getter
   rescue Exception => e
     puts "GetPage faile: #{e.message}"
   end
 
-  def self.get_res res_no, options = {}
-    homu_getter = HomuGetter.new options
+  def self.get_res res_no
+    homu_getter = HomuGetter.new
     homu_getter.download_res res_no
     res = do_parse homu_getter
     res.first
