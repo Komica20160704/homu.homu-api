@@ -13,15 +13,28 @@ class HomuBlockParser
   HIDEN_BODY_FORMAT = /有回應\s(?<counts>\d+)\s篇被省略。(要閱讀所有回應請按下回應連結。|)/
 
   def parse block
-    details = block.css('div.post').map { |dialog| do_match(dialog).to_hash }
+    details = block.css('div.post').map { |dialog| do_match dialog }
+    head = details.shift
+    bodies = details
+    save_result_to_posts head, bodies
     block_hash = {
-      'Head' => details.shift,
-      'Bodies' => details
+      'Head' => head.to_hash,
+      'Bodies' => bodies.map(&:to_hash),
     }
     return block_hash
   end
 
   private
+
+  def save_result_to_posts head, bodies
+    head_post = head.find_or_create_post
+    numbers = bodies.map &:no
+    posts = Post.where(number: numbers).pluck(:number)
+    bodies.each do |body|
+      next if posts.include?(body.no)
+      body.create_post(head_post.id)
+    end
+  end
 
   def do_match dialog
     detail = match_detail dialog

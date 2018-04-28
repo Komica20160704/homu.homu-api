@@ -5,4 +5,5 @@ else
   ENV['RACK_ENV'] ||= 'development'
 end
 Bundler.require
+Time.zone = ActiveSupport::TimeZone.new 'Taipei'
 Dir['./models/*.rb'].each { |model| require model }
