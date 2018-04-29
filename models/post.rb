@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   default_scope { order(:number) }
   scope :today, -> { where('post_at > ?', Date.today.to_time) }
+  scope :this_week, -> { where('post_at > ?', Date.today.to_time - 7.days) }
 
   belongs_to :head, class_name: 'Post', inverse_of: :bodies
   has_many :bodies, class_name: 'Post', foreign_key: :head_id, inverse_of: :head

@@ -5,7 +5,7 @@ def get_posts_json
 end
 
 get %r{/posts/(?<kid>[\w\.\/]{8})(|.json)} do |kid|
-  get_posts_json { Post.today.where(kid: kid) }
+  get_posts_json { Post.this_week.where(kid: kid) }
 end
 
 get %r{/posts(|.json)} do
