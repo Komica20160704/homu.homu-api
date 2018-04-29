@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '~> 2.5.0'
+ruby '2.5.0'
 
 # Server App
 gem 'sinatra', '~> 2.0.1'
@@ -10,12 +10,16 @@ gem 'thin'
 # Database
 gem 'sinatra-activerecord'
 gem 'activerecord'
+gem 'kaminari'
 gem 'pg'
 # Library
 gem 'activesupport', require: 'active_support/all'
 gem 'rake'
 gem 'json'
 gem 'nokogiri'
+# Helpful
+gem 'pry'
+gem 'awesome_print'
 gem 'byebug'
 
 group :test do

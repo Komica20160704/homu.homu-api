@@ -42,6 +42,8 @@ get '/res/:no' do |no|
   end
 end
 
+require './lib/posts'
+
 get '/read/:no' do |no|
   @ref_no = no
   begin
