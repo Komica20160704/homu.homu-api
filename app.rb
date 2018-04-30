@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'sinatra'
+require 'sinatra/contrib'
 require 'sinatra/reloader' if development?
 require 'json'
 require 'open-uri'

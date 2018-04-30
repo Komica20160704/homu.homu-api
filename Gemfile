@@ -4,7 +4,7 @@ ruby '2.5.0'
 
 # Server App
 gem 'sinatra', '~> 2.0.1'
-gem 'sinatra-contrib'
+gem 'sinatra-contrib', require: false
 gem 'rack'
 gem 'thin'
 # Database
