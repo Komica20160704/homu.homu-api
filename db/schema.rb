@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328164107) do
+ActiveRecord::Schema.define(version: 20180430150410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,10 @@ ActiveRecord::Schema.define(version: 20180328164107) do
     t.string "picture"
     t.integer "hidden_body_count"
     t.text "content"
+    t.string "head_number"
     t.index ["head_id"], name: "index_posts_on_head_id"
+    t.index ["kid"], name: "index_posts_on_kid"
+    t.index ["number"], name: "index_posts_on_number"
   end
 
 end
