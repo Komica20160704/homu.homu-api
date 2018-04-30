@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/hosts/const'
 
 module Hosts
@@ -8,13 +10,13 @@ module Hosts
       @res_url = '/pixmicat.php?res='
     end
 
-    def page page
+    def page(page)
       page = 'index' if page.to_s == '0'
       "#{@host_url}#{page}#{@page_url}"
     end
 
-    def res no
-      "#{@host_url}#{@res_url}#{no}"
+    def res(res_no)
+      "#{@host_url}#{@res_url}#{res_no}"
     end
   end
 end

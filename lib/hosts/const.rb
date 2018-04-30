@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hosts
   module Const
     KOMICA_URL = 'https://web.komica.org/'

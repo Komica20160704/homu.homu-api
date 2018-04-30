@@ -1,26 +1,29 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '2.5.0'
 
 # Server App
+gem 'rack'
 gem 'sinatra', '~> 2.0.1'
 gem 'sinatra-contrib', require: false
-gem 'rack'
 gem 'thin'
 # Database
-gem 'sinatra-activerecord'
 gem 'activerecord'
 gem 'kaminari'
 gem 'pg'
+gem 'sinatra-activerecord'
 # Library
 gem 'activesupport', require: 'active_support/all'
-gem 'rake'
 gem 'json'
 gem 'nokogiri'
+gem 'rake'
 # Helpful
-gem 'pry'
 gem 'awesome_print'
 gem 'byebug'
+gem 'pry'
+gem 'rubocop'
 
 group :test do
   gem 'rspec'
@@ -28,6 +31,6 @@ group :test do
 end
 
 group :development do
-  gem 'puma'
   gem 'powder'
+  gem 'puma'
 end

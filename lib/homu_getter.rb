@@ -1,5 +1,6 @@
-# encoding: utf-8
-require 'open-uri'
+# frozen_string_literal: true
+
+require 'net/http'
 require 'timeout'
 require 'nokogiri'
 require './lib/hosts/homu'
@@ -12,14 +13,14 @@ class HomuGetter
     @host = Hosts::Homu.new
   end
 
-  def download_page page
-    url = @host.page(page)
+  def download_page(page)
+    url = @host.page page
     puts "DownloadPage: #{url}"
     get_html url
   end
 
-  def download_res no
-    url = @host.res(no)
+  def download_res(res_no)
+    url = @host.res res_no
     puts "DownloadRes: #{url}"
     get_html url
   end
@@ -30,14 +31,13 @@ class HomuGetter
 
   private
 
-  def get_html url
-    Timeout.timeout(@timeout) do
-      raw = open(url).read
-      @html = Nokogiri::HTML(raw)
-      @html.encoding = 'utf-8'
+  def get_html(url)
+    Timeout.timeout @timeout do
+      raw = Net::HTTP.get URI url
+      @html = Nokogiri::HTML raw
     end
+    @html.encoding = 'utf-8'
     @html.search('br').each { |n| n.replace("\n") }
-    @html.search('font').each { |n| n = n.text if n['color'] == '789922' }
     @blocks = @html.css('.thread')
   end
 end

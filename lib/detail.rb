@@ -1,25 +1,22 @@
+# frozen_string_literal: true
+
 class Detail
   attr_writer :picture, :content, :hiden_body_count
   attr_reader :no
 
-  def initialize matched_data
-    @title = matched_data[1]
-    @name = matched_data[2]
-    @date = matched_data[3]
-    @time = matched_data[4]
-    @id = matched_data[5]
-    @no = matched_data[6]
+  def initialize(matched_data)
+    @title, @name, @date, @time, @id, @no = matched_data
   end
 
   def to_hash
     hash = {}
-    self.instance_variables.each do |var|
+    instance_variables.each do |var|
       hash_name = var.to_s
-      hash_name.sub!('@', '').gsub!('_', '')
-      hash_value = self.instance_variable_get var
+      hash_name.sub!('@', '').delete!('_')
+      hash_value = instance_variable_get var
       hash[hash_name.camelize] = hash_value if hash_value
     end
-    return hash
+    hash
   end
 
   def find_or_create_post
@@ -28,19 +25,16 @@ class Detail
     create_post
   end
 
-  def create_post head_post = nil
-    Post.create do |post|
-      post.head_id = head_post.try(:id)
-      post.head_number = head_post.try(:number)
-      post.title = @title
-      post.name = @name
-      post.name = @name
-      post.post_at = Time.parse "#{@date}T#{@time}"
-      post.kid = @id
-      post.number = @no
-      post.picture = @picture
-      post.hidden_body_count = @hiden_body_count
-      post.content = @content
-    end
+  def create_post(head_post = nil)
+    Post.create(head_id: head_post.try(:id),
+                head_number: head_post.try(:number),
+                title: @title,
+                name: @name,
+                post_at: Time.parse("#{@date}T#{@time}"),
+                kid: @id,
+                number: @no,
+                picture: @picture,
+                hidden_body_count: @hiden_body_count,
+                content: @content)
   end
 end

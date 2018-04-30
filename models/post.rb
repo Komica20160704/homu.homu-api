@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ActiveRecord::Base
   # relations
   belongs_to :head, class_name: 'Post', inverse_of: :bodies
@@ -14,11 +16,11 @@ class Post < ActiveRecord::Base
   paginates_per 10
   max_paginates_per 20
 
-  def is_head?
+  def head?
     head_id.blank?
   end
 
-  def is_body?
+  def body?
     head_id.present?
   end
 end

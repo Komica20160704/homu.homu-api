@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bundler'
 if ENV['HOMU_DATABASE_PASSWORD']
   ENV['RACK_ENV'] = 'production'

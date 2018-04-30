@@ -1,4 +1,5 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/contrib'
 require 'sinatra/reloader' if development?
@@ -15,7 +16,7 @@ get '/' do
   threads = (@page..(@page + 1)).map do |page|
     Thread.new { pages << HomuApi.get_page(page) }
   end
-  threads.each &:join
+  threads.each(&:join)
   blocks = pages.flatten.compact
   @heads = blocks.map { |block| block['Head'] }.sort { |head| head['No'].to_i }
   erb :ptt_index
