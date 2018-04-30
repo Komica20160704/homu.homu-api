@@ -29,10 +29,10 @@ class HomuBlockParser
   def save_result_to_posts head, bodies
     head_post = head.find_or_create_post
     numbers = bodies.map &:no
-    posts = Post.where(number: numbers).pluck(:number)
+    post_numbers = Post.where(number: numbers).pluck(:number)
     bodies.each do |body|
-      next if posts.include?(body.no)
-      body.create_post(head_post.id)
+      next if post_numbers.include?(body.no)
+      body.create_post(head_post)
     end
   end
 

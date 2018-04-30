@@ -28,9 +28,10 @@ class Detail
     create_post
   end
 
-  def create_post head_id = nil
+  def create_post head_post = nil
     Post.create do |post|
-      post.head_id = head_id
+      post.head_id = head_post.try(:id)
+      post.head_number = head_post.try(:number)
       post.title = @title
       post.name = @name
       post.name = @name
