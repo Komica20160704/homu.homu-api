@@ -27,7 +27,7 @@ class Detail
 
   def create_post(head_post = nil)
     Post.create(head_id: head_post.try(:id),
-                head_number: head_post.try(:number),
+                head_number: head_post.try(:number) || @no,
                 title: @title,
                 name: @name,
                 post_at: Time.parse("#{@date}T#{@time}"),
