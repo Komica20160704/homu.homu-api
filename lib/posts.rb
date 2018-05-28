@@ -8,8 +8,10 @@ end
 
 get '/posts' do
   page = params[:page].try(:to_i) || 1
-  id = params[:id].try(:to_s)
+  query = params.slice :id, :number, :head_number, :title, :name
+  id = query.delete :id
+  query[:kid] = id if id.present?
   posts = Post.reorder(number: :desc).page(page)
-  posts = posts.where(kid: id) if id.present?
+  posts = posts.where(query) if query.present?
   json_posts { posts }
 end

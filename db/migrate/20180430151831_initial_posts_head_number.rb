@@ -7,6 +7,6 @@ class InitialPostsHeadNumber < ActiveRecord::Migration[5.1]
   end
 
   def down
-    Post.update_all(head_number: nil)
+    Post.where.not(head_id: nil).update_all(head_number: nil)
   end
 end
