@@ -10,6 +10,8 @@ require './lib/homu_api'
 set :show_exceptions, false if production?
 set :root, File.dirname(__FILE__)
 
+before { puts "Params: #{params}" }
+
 get '/' do
   @page = params['page'].to_i
   pages = []
