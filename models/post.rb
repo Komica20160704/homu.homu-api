@@ -23,4 +23,13 @@ class Post < ActiveRecord::Base
   def body?
     head_id.present?
   end
+
+  def as_json(options)
+    type = options.delete :type
+    return super options if type != :homu
+    options[:except] = %i[id kid head_id]
+    json = super options
+    json['id'] = kid
+    json
+  end
 end

@@ -3,18 +3,13 @@
 def json_posts
   headers 'Access-Control-Allow-Origin' => '*'
   posts = yield if block_given?
-  json posts.as_json(except: %i[id head_id])
+  json posts.as_json(type: :homu)
 end
 
-get %r{/posts/(?<kid>[\w\.\/]{8})(|.json)} do |kid|
-  json_posts { Post.recent.where(kid: kid) }
-end
-
-get %r{/posts(|.json)} do
+get '/posts' do
   page = params[:page].try(:to_i) || 1
-  json_posts { Post.today.page(page) }
-end
-
-get %r{/posts/last(|.json)} do
-  json_posts { Post.today.last(10) }
+  id = params[:id].try(:to_s)
+  posts = Post.reorder(number: :desc).page(page)
+  posts = posts.where(kid: id) if id.present?
+  json_posts { posts }
 end
