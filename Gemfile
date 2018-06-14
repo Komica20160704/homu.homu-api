@@ -2,11 +2,11 @@
 
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 # Server App
 gem 'rack'
-gem 'sinatra', '~> 2.0.1'
+gem 'sinatra'
 gem 'sinatra-contrib', require: false
 gem 'thin'
 # Database
