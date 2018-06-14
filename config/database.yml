@@ -1,5 +1,5 @@
 default: &default
-  adapter: postgresql
+  adapter: mysql
   encoding: utf-8
   pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
 
@@ -11,5 +11,5 @@ production:
   <<: *default
   host: 127.0.0.1
   database: homu_production
-  username: homu
+  username: root
   password: <%= ENV['HOMU_DATABASE_PASSWORD'] %>

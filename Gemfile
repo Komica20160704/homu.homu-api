@@ -12,7 +12,7 @@ gem 'thin'
 # Database
 gem 'activerecord'
 gem 'kaminari'
-gem 'pg'
+gem 'mysql2'
 gem 'sinatra-activerecord'
 # Library
 gem 'activesupport', require: 'active_support/all'
