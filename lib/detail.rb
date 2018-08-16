@@ -4,25 +4,28 @@ class Detail
   attr_writer :picture, :content, :hiden_body_count
   attr_reader :no
 
-  def initialize(matched_data)
+  def initialize(matched_data = [])
     @title, @name, @date, @time, @id, @no = matched_data
+  end
+
+  def self.from_hash(hash)
+    detail = Detail.new
+    hash.each do |key, value|
+      var = key.underscore.prepend('@').to_sym
+      detail.instance_variable_set var, value
+    end
+    detail
   end
 
   def to_hash
     hash = {}
     instance_variables.each do |var|
-      hash_name = var.to_s
-      hash_name.sub!('@', '').delete!('_')
       hash_value = instance_variable_get var
-      hash[hash_name.camelize] = hash_value if hash_value
+      next unless hash_value
+      key = var.to_s.delete('@').camelize
+      hash[key] = hash_value
     end
     hash
-  end
-
-  def find_or_create_post
-    post = Post.find_by(number: @no)
-    return post if post.present?
-    create_post
   end
 
   def create_post(head_post = nil)

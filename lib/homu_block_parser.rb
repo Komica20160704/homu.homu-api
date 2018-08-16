@@ -17,7 +17,6 @@ class HomuBlockParser
     details = block.css('div.post').map { |dialog| do_match dialog }
     head = details.shift
     bodies = details
-    save_result_to_posts head, bodies
     {
       'Head' => head.to_hash,
       'Bodies' => bodies.map(&:to_hash)
@@ -25,16 +24,6 @@ class HomuBlockParser
   end
 
   private
-
-  def save_result_to_posts(head, bodies)
-    head_post = head.find_or_create_post
-    numbers = bodies.map(&:no)
-    post_numbers = Post.where(number: numbers).pluck(:number)
-    bodies.each do |body|
-      next if post_numbers.include?(body.no)
-      body.create_post(head_post)
-    end
-  end
 
   def do_match(dialog)
     detail = match_detail dialog

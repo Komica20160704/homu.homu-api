@@ -11,7 +11,12 @@ set :logger, Thin::Logging.logger
 set :show_exceptions, false if production?
 set :root, File.dirname(__FILE__)
 
-before { logger.info "Params: #{params}" }
+before do
+  logger.info "Start #{request.request_method} #{url}"
+  logger.info "Params: #{params}"
+end
+
+after { logger.info "Complete #{status}" }
 
 get '/' do
   @page = params['page'].to_i
