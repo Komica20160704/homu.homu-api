@@ -7,10 +7,11 @@ require 'json'
 require 'open-uri'
 require './lib/homu_api'
 
+set :logger, Thin::Logging.logger
 set :show_exceptions, false if production?
 set :root, File.dirname(__FILE__)
 
-before { puts "Params: #{params}" }
+before { logger.info "Params: #{params}" }
 
 get '/' do
   @page = params['page'].to_i
