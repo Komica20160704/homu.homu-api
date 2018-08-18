@@ -25,4 +25,4 @@ namespace :thin do
   end
 end
 
-before 'deploy:published', 'docker:restart'
+before 'deploy:published', 'thin:restart'
