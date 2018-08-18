@@ -1,53 +1,15 @@
-<%
-  head = @res['Head']
-  bodies = @res['Bodies']
-
-  def small_picture picture
-    s = picture.split('.')
-    return s[0] + 's.jpg'
-  end
-
-  def body_line line
-    line.chomp!
-    if line[0] == '>'
-      line = '</span><span class=\'f7 push-content\'>' + line
-    end
-    return line
-  end
-
-  def write_body body
-    first_line = true
-    text = ""
-    body['Content'].each_line do |line|
-      next if line == "\n"
-      text += "<div class='push'>"
-      if first_line
-        text += "<span class='hl push-tag'>No.#{body['No']}"
-        first_line = false
-      else
-        text += "<span class='f0 hl push-tag'>No.#{body['No']}"
-      end
-      text += " </span><span class='f3 hl push-userid'>#{body['Id']}</span>"
-      text += "<span class='f3 push-content'>: #{body_line line}</span>"
-      text += "<span class='push-ipdatetime'>#{body['Date'][5..9]} #{body['Time'][0..4]}</span>"
-      text += "</div>"
-    end
-    return text
-  end
-%>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= head['Title'] %> - 綜合 - KOMICA</title>
+    <title><%= @head['Title'] %> - 綜合 - KOMICA</title>
     <meta name="keywords" content="KOMICA">
-    <meta name="description" content="<%= head['Content']%>">
+    <meta name="description" content="<%= @head['Content']%>">
     <meta property="og:site_name" content="KOMICA">
-    <meta property="og:title" content="<%=head['Title']%>">
-    <meta property="og:description" content="<%= head['Content']%>">
+    <meta property="og:title" content="<%=@head['Title']%>">
+    <meta property="og:description" content="<%= @head['Content']%>">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-common.css">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-base.css" media="screen">
     <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-custom.css">
@@ -62,17 +24,17 @@
 
 <body>
 <div id="main-container">
-<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='<%= Hosts::Const::KOMICA_URL %>' target='_blank'>KOMICA</a> - <a href='<%= Hosts::Const::HOMU_INDEX %>' target="_blank">綜合</a> - <a href='../'>討論串列表</a> - <%= head['No'] %></span> <a class='jsbtn' onclick='goBottom()'>[到達底端]</a> <a class='jsbtn' onclick='goTop()'>[回到頂端]</a> <a class='jsbtn' href='../comic/<%= head['No'] %>'>[畫廊檢視]</a></div></div>
-<div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%= head['Id'] %>(<%= head['Name'] %>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%= head['Title'] %></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%= head['Date'] %> <%= head['Time'] %></span></div>
-<%if head['Picture']%><a href="<%= Hosts::Const::HOMU_IMAGE %>/src/<%= head['Picture']%>" target="_blank"><img src="<%= Hosts::Const::HOMU_IMAGE %>/thumb/<%= small_picture head['Picture']%>"></a><%end%><span>
+<div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='<%= Hosts::Const::KOMICA_URL %>' target='_blank'>KOMICA</a> - <a href='<%= Hosts::Const::HOMU_INDEX %>' target="_blank">綜合</a> - <a href='../'>討論串列表</a> - <%= @head['No'] %></span> <a class='jsbtn' onclick='goBottom()'>[到達底端]</a> <a class='jsbtn' onclick='goTop()'>[回到頂端]</a> <a class='jsbtn' href='../comic/<%= @head['No'] %>'>[畫廊檢視]</a></div></div>
+<div id="main-content" class="bbs-screen bbs-content"><div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value"><%= @head['Id'] %>(<%= @head['Name'] %>)</span></div><div class="article-metaline-right"><span class="article-meta-tag">看板</span><span class="article-meta-value">綜合</span></div><div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value"><%= @head['Title'] %></span></div><div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">20<%= @head['Date'] %> <%= @head['Time'] %></span></div>
+<% if @head['Picture'] %><a href="<%= origin_picture(@head['Picture']) %>" target="_blank"><img src="<%= small_picture(@head['Picture']) %>"></a><% end %><span>
 
-<%= head['Content']%>
+<%= @head['Content'] %>
 
 
 --</span>
-<span class="f2">※ 發信站: KOMICA, No.<%= head['No'] %>
-</span><span class="f2">※ 文章網址: <a href="<%= Hosts::Const::HOMU_INDEX %>pixmicat.php?res=<%= head['No'] %>" target="_blank" rel="nofollow"><%= Hosts::Const::HOMU_INDEX %>pixmicat.php?res=<%= head['No'] %></a>
-</span><% bodies.each do |body| %><%= write_body body %><%if body['Picture']%><a href="<%= Hosts::Const::HOMU_IMAGE %>/src/<%= body['Picture']%>" target="_blank"><img src="<%= Hosts::Const::HOMU_IMAGE %>/thumb/<%= small_picture body['Picture']%>"></a><%end%><% end %></div><div id="jump_to_me">bottom</div>
+<span class="f2">※ 發信站: KOMICA, No.<%= @head['No'] %>
+</span><span class="f2">※ 文章網址: <a href="<%= source_url(@head['No']) %>" target="_blank" rel="nofollow">source_url(@head['No'])</a>
+</span><% @bodies.each do |body| %><%= write_body body %><% if body['Picture'] %><a href="<%= origin_picture(body['Picture']) %>" target="_blank"><img src="<%= small_picture(body['Picture']) %>"></a><% end %><% end %></div><div id="jump_to_me">bottom</div>
 
 </body>
 </html>

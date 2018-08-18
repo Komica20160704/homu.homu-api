@@ -6,10 +6,13 @@ require 'sinatra/reloader' if development?
 require 'json'
 require 'open-uri'
 require './lib/homu_api'
+require './helpers/ptt_helper'
 
 set :logger, Thin::Logging.logger
 set :show_exceptions, false if production?
 set :root, File.dirname(__FILE__)
+
+helpers PttHelper
 
 before do
   logger.info "Start #{request.request_method} #{url}"
@@ -26,7 +29,8 @@ get '/' do
   end
   threads.each(&:join)
   blocks = pages.flatten.compact
-  @heads = blocks.map { |block| block['Head'] }.sort { |head| head['No'].to_i }
+  @heads = blocks.map { |block| block['Head'] }
+  @heads.sort_by! { |head| head['No'] }
   erb :ptt_index
 end
 
@@ -55,8 +59,10 @@ end
 require './lib/posts'
 
 get '/read/:no' do |no|
-  @res = HomuApi.get_res no
-  if @res
+  res = HomuApi.get_res no
+  @head = res['Head']
+  @bodies = res['Bodies']
+  if res
     erb :ptt
   else
     redirect '/'
