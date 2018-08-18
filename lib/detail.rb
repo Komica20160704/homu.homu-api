@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Detail
-  attr_writer :picture, :content, :hiden_body_count
-  attr_reader :no
+  attr_writer :picture, :content, :hidden_body_count
+  attr_reader :no, :hidden_body_count
 
   def initialize(matched_data = [])
     @title, @name, @date, @time, @id, @no = matched_data
@@ -11,7 +11,7 @@ class Detail
   def self.from_hash(hash)
     detail = Detail.new
     hash.each do |key, value|
-      var = key.underscore.prepend('@').to_sym
+      var = :"@#{key.underscore}"
       detail.instance_variable_set var, value
     end
     detail
@@ -37,7 +37,7 @@ class Detail
                 kid: @id,
                 number: @no,
                 picture: @picture,
-                hidden_body_count: @hiden_body_count,
+                hidden_body_count: @hidden_body_count,
                 content: @content)
   end
 end

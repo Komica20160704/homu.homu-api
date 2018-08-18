@@ -63,7 +63,7 @@
 <div id="main-container">
 <div id="topbar-container"><div id="topbar" class="bbs-content"><span class='f7 hl'><a href='<%= Hosts::Const::KOMICA_URL %>' target='_blank'>KOMICA</a> - <a href='<%= Hosts::Const::HOMU_INDEX %>' target="_blank">綜合</a> - 討論串列表</span><a href='./api' style="float:right">APIs</a> <a href='<%= Hosts::Const::HOMU_API_URL %>' style="float:right">即時綜合</a></div></div>
 <div id="main-content" class="bbs-screen bbs-content"><span class='f0 b7'>   編號    日 期 作  者   文  章  標  題                                                            </span>
-<% @heads.each do |head| %><span><%= head['No'][1..7].rjust(7) %><%= get_puch_count head['Hidenbodycount'] %><%= get_date head['Date'] %> <%= head['Id']%> <%= get_title head%></span>
+<% @heads.each do |head| %><span><%= head['No'][1..7].rjust(7) %><%= get_puch_count head['HiddenBodyCount'] %><%= get_date head['Date'] %> <%= head['Id']%> <%= get_title head%></span>
 <% end %><span>
 </span><span class='f0 hl'><% if @page == 0 %>最前頁<% else %><a href='./?page=<%= @page - 1 %>'>上一頁</a><% end %> <% (0..9).each do |i| %><% if @page == i %><span class="hl">[<%=i%>]</span><% else %><a href='./?page=<%=i%>'>[<%=i%>]</a><% end %><% end %> <% if @page == 9 %>最後頁<% else %><a href='./?page=<%= @page + 1 %>'>下一頁</a><% end %></span>
 </div>

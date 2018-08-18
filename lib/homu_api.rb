@@ -42,10 +42,21 @@ class HomuApi
 
   def self.save_each_posts(hashes, post_index)
     hashes.map do |hash|
-      head = Detail.from_hash(hash['Head'])
-      head_post = post_index[head.no].presence || head.create_post
+      head_post = save_or_update_head(hash['Head'], post_index)
       hash['Bodies'].each { |body| save_bodies(head_post, body, post_index) }
     end
+  end
+
+  def self.save_or_update_head(hash, post_index)
+    head = Detail.from_hash(hash)
+    head_post = post_index[head.no]
+    if head_post.present?
+      head_post.hidden_body_count = head.hidden_body_count
+      head_post.save if head_post.hidden_body_count_changed?
+    else
+      head_post = head.create_post
+    end
+    head_post
   end
 
   def self.save_bodies(head_post, body, post_index)

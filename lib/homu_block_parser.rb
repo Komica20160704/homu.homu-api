@@ -29,7 +29,7 @@ class HomuBlockParser
     detail = match_detail dialog
     detail.picture = match_picture dialog
     detail.content = match_content dialog
-    detail.hiden_body_count = match_hiden_body dialog
+    detail.hidden_body_count = match_hiden_body dialog
     detail
   end
 
