@@ -9,7 +9,7 @@ class HomuApi
     homu_getter.download_page page_number
     do_parse homu_getter
   rescue StandardError => e
-    puts "GetPage faile: #{e.inspect}"
+    puts "GetPage failed: #{e.inspect}"
   end
 
   def self.get_res(res_no)
@@ -18,7 +18,7 @@ class HomuApi
     res = do_parse homu_getter
     res.first
   rescue StandardError => e
-    puts "GetPage faile: #{e.inspect}"
+    puts "GetPage failed: #{e.inspect}"
   end
 
   private_class_method

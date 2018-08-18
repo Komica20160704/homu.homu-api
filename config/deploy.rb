@@ -25,4 +25,6 @@ namespace :thin do
   end
 end
 
-before 'deploy:published', 'thin:restart'
+before 'deploy:published', 'thin:stop'
+before 'deploy:published', 'thin:start'
+# before 'deploy:published', 'thin:restart'

@@ -55,20 +55,20 @@ end
 require './lib/posts'
 
 get '/read/:no' do |no|
-  @ref_no = no
-  begin
+  @res = HomuApi.get_res no
+  if @res
     erb :ptt
-  rescue OpenURI::HTTPError
+  else
     redirect '/'
   end
 end
 
 get '/comic/:no' do |no|
-  @ref_no = no
-  begin
+  @res = HomuApi.get_res no
+  if @res
     erb :comic
-  rescue OpenURI::HTTPError
-    '找不到此討論串'
+  else
+    redirect '/'
   end
 end
 

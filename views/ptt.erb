@@ -1,8 +1,6 @@
 <%
-  require './lib/homu_api'
-  res = HomuApi.get_res @ref_no
-  head = res['Head']
-  bodies = res['Bodies']
+  head = @res['Head']
+  bodies = @res['Bodies']
 
   def small_picture picture
     s = picture.split('.')

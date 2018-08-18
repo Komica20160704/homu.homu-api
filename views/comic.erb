@@ -1,9 +1,3 @@
-<%
-  require './lib/homu_api'
-  res = HomuApi.get_res @ref_no
-  url = "#{Hosts::Const::HOMU_IMAGE}/src/"
-%>
-
 <!DOCTYPE html>
 <html>
 
@@ -35,8 +29,8 @@
   </style>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script type="text/javascript">
-    var res = <%= res.to_json %>;
-    var img_url = "<%= url %>";
+    var res = <%= @res.to_json %>;
+    var img_url = "<%= "#{Hosts::Const::HOMU_IMAGE}/src/" %>";
     var index = -1;
     var weekday = [ "日", "一", "二", "三", "四", "五", "六" ]
 
@@ -44,11 +38,7 @@
       if (block.Picture) {
         LoadPage(GetImgURL(block.Picture));
       } else {
-        if ($("#page_img")[0].src.match("no_pic\.jpg")) {
-          return;
-        } else {
-          LoadPage("../no_pic.jpg");
-        }
+        LoadPage("../no_pic.jpg");
       };
     }
 
@@ -61,9 +51,11 @@
     }
 
     function LoadPage(img) {
-      $("#page_loading").css("display", "block");
-      $("#page_img").css("display", "none");
-      $("#page_img")[0].src = img;
+      if ($("#page_img")[0].src !== img) {
+        $("#page_loading").css("display", "block");
+        $("#page_img").css("display", "none");
+        $("#page_img")[0].src = img;
+      }
     }
 
     function PreLoadPage(img) {
@@ -94,10 +86,10 @@
       PreLoadImg(res.Bodies[0]);
     }
 
-    function LoadBody(index) {
-      LoadImg(res.Bodies[index]);
-      LoadDialog("#dialog", res.Bodies[index]);
-      PreLoadImg(res.Bodies[index + 1]);
+    function LoadBody(body, nextBody) {
+      LoadImg(body);
+      LoadDialog("#dialog", body);
+      PreLoadImg(nextBody);
     }
 
     function OnPageImgLoad() {
@@ -113,23 +105,55 @@
       $(".page_button").css("height", $(this).height() + "px");
     }
 
+    function BodiesOnlyPoster() {
+      var head = res.Head
+      var bodies = res.Bodies
+      return bodies.filter(function(body) {
+        return body['Id'] === head['Id']
+      })
+    }
+
+    function GetBodies() {
+      var checked = $('#only-poster').is(':checked')
+      if (checked) {
+        return BodiesOnlyPoster()
+      } else {
+        return res.Bodies
+      }
+    }
+
+    function resetPage() {
+      index = -1
+      LoadBody(res.Head, res.Bodies[0]);
+    }
+
     function PrePage() {
+      var bodies = GetBodies()
       if (index > -1) {
         index--;
         if (index == -1) {
-          LoadHead();
+          LoadBody(res.Head, res.Bodies[0]);
         } else {
-          LoadBody(index);
+          LoadBody(bodies[index], bodies[index + 1]);
         }
       };
     }
 
     function NextPage() {
-      if (index < res.Bodies.length - 1) {
+      var bodies = GetBodies()
+      if (index < bodies.length - 1) {
         index++;
-        LoadBody(index);
+        LoadBody(bodies[index], bodies[index + 1]);
       } else {
         alert("沒有下一張了");
+      }
+    }
+
+    function HandleKeyChangePage(event) {
+      if (event.key === 'ArrowRight') {
+        NextPage()
+      } else if (event.key === 'ArrowLeft') {
+        PrePage()
       }
     }
   </script>
@@ -139,6 +163,11 @@
   <p id="head_bar" align="center">
     <font size="5"><b><span>綜合</span></b></font>
   </p>
+  <div style="float: right; margin-top: -4em; margin-right: 1em;">
+    [<a href='/read/<%= @res['Head']['No'] %>'>離開畫廊檢視</a>]
+    [<input type="checkbox" id="only-poster" onclick="resetPage();">
+     <label for="only-poster">只看原PO</label>]
+  </div>
   <hr width="90%" size="1">
   <div style="width:100%;">
     <div id="page_btn_l" class="page_button" style="left:50%;" onclick="NextPage();"></div>
@@ -156,11 +185,11 @@
     <font id="dialog_data"></font>
     <blockquote id="dialog_content"></blockquote>
   </div>
-  [<a href='/read/<%= res['Head']['No'] %>'>離開畫廊檢視</a>]
 </body>
 
 <script type="text/javascript">
   $("#page_img").load(OnPageImgLoad);
+  $(document).keydown(HandleKeyChangePage)
   LoadHead();
 </script>
 

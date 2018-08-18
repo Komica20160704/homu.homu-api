@@ -1,9 +1,4 @@
 <%
-  def small_picture picture
-    s = picture.split('.')
-    return s[0] + 's.jpg'
-  end
-
   def get_puch_count count
     i = count.to_i
     if count.nil?
@@ -48,15 +43,15 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>討論串列表 - 綜合 - KOMICA</title>
-    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-common.css">
-    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-base.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-custom.css">
-    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/pushstream.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-print.css" media="print">
-    <style> a{text-decoration:none} </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>討論串列表 - 綜合 - KOMICA</title>
+  <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-common.css">
+  <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-base.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-custom.css">
+  <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/pushstream.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://images.ptt.cc/bbs/v2.22/bbs-print.css" media="print">
+  <style> a{text-decoration:none} </style>
 </head>
 
 <body>
