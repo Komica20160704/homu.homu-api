@@ -15,7 +15,7 @@ set :root, File.dirname(__FILE__)
 helpers PttHelper
 
 before do
-  logger.info "Start #{request.request_method} #{url}"
+  logger.info "Start #{request.request_method} #{url} for #{request.ip}"
   logger.info "Params: #{params}"
 end
 
@@ -36,23 +36,17 @@ end
 
 get '/page/:page' do |page|
   headers 'Access-Control-Allow-Origin' => '*'
-  content_type :json
-  begin
-    return HomuApi.get_page(page).to_json
-  rescue OpenURI::HTTPError
-    status 404
-    return { success: 0, message: '找不到此討論串' }.to_json
-  end
+  json HomuApi.get_page(page)
 end
 
 get '/res/:no' do |no|
   headers 'Access-Control-Allow-Origin' => '*'
-  content_type :json
-  begin
-    return HomuApi.get_res(no).to_json
-  rescue OpenURI::HTTPError
+  res = HomuApi.get_res(no)
+  if res
+    json res
+  else
     status 404
-    return { success: 0, message: '找不到此討論串' }.to_json
+    json success: false, message: '找不到此討論串'
   end
 end
 
@@ -60,9 +54,9 @@ require './lib/posts'
 
 get '/read/:no' do |no|
   res = HomuApi.get_res no
-  @head = res['Head']
-  @bodies = res['Bodies']
   if res
+    @head = res['Head']
+    @bodies = res['Bodies']
     erb :ptt
   else
     redirect '/'
