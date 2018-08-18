@@ -2,3 +2,4 @@ temp/
 log/
 tmp/
 .byebug_history
+.capistrano.yml

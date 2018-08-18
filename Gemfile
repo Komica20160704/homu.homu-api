@@ -31,6 +31,9 @@ group :test do
 end
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
   gem 'powder'
   gem 'puma'
 end
