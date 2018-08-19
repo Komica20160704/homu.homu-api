@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require './lib/hosts/const'
+require './lib/image_cat'
+
 class Post < ActiveRecord::Base
   # relations
   belongs_to :head, class_name: 'Post', inverse_of: :bodies
@@ -31,5 +34,14 @@ class Post < ActiveRecord::Base
     json = super options
     json['id'] = kid
     json
+  end
+
+  def picture_url
+    "#{Hosts::Const::HOMU_IMAGE}/src/#{picture}"
+  end
+
+  def cat_picture
+    return if picture.blabk?
+    ImageCat.from_uri picture_url
   end
 end
