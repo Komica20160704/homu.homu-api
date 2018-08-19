@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
   end
 
   def cat_picture
-    return if picture.blabk?
+    return if picture.blank?
     ImageCat.from_uri picture_url
   end
 end
