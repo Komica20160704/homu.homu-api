@@ -1,5 +1,6 @@
 temp/
 log/
 tmp/
+config/master.key
 .byebug_history
 .capistrano.yml

@@ -5,7 +5,7 @@ lock '~> 3.11.0'
 set :application, 'api-homu'
 set :repo_url, 'https://github.com/Komica20160704/homu.homu-api'
 set :deploy_to, '/home/api-homu'
-append :linked_files, 'config/database.yml'
+append :linked_files, 'config/database.yml', 'config/master.key'
 append :linked_dirs, '.bundle', 'log', 'tmp/pids'
 append :bundle_bins, 'thin'
 set :keep_releases, 2
