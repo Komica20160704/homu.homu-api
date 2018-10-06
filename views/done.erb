@@ -1,0 +1,13 @@
+<script>
+  var token = <%= token.to_json %>
+  var payload = <%= payload.to_json %>
+  if (window.opener) {
+    var message = {
+      type: 'japariman:sabisu',
+      payload: payload,
+      token: token,
+    }
+    opener.postMessage(message, 'https://www.homu-api.com')
+  }
+  window.close()
+</script>

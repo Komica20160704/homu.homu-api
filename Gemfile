@@ -17,6 +17,7 @@ gem 'sinatra-activerecord'
 # Library
 gem 'activesupport', require: 'active_support/all'
 gem 'json'
+gem 'jwt'
 gem 'nokogiri'
 gem 'rake'
 # Helpful
