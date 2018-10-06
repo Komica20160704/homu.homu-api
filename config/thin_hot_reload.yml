@@ -1,0 +1,4 @@
+environment: production
+port: 3001
+daemonize: true
+pid: tmp/pids/thin_hot_reload.pid
