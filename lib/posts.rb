@@ -48,6 +48,6 @@ get '/posts' do
   posts = Post.reorder(number: :desc).where(query).page(page)
   posts = posts.where(adv_query) if is_adv && adv_query.present?
   headers 'Access-Control-Expose-Headers' => 'Total-Pages'
-  headers 'Total-Pages' => posts.total_pages
+  headers 'Total-Pages' => posts.total_pages.to_s
   json_posts { posts }
 end
