@@ -40,7 +40,7 @@ get '/posts' do
     is_adv = jwt_posts(token)
     return 401 unless is_adv
   end
-  page = (is_adv && params[:page].try(:to_i)) || 1
+  page = params[:page].try(:to_i) || 1
   adv_query = params.slice :number, :head_number, :title, :name
   query = {}
   id = params[:id]
