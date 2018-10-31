@@ -33,7 +33,7 @@
 
 --</span>
 <span class="f2">※ 發信站: KOMICA, No.<%= @head['No'] %>
-</span><span class="f2">※ 文章網址: <a href="<%= source_url(@head['No']) %>" target="_blank" rel="nofollow">source_url(@head['No'])</a>
+</span><span class="f2">※ 文章網址: <a href="<%= source_url(@head['No']) %>" target="_blank" rel="nofollow"><%= source_url(@head['No']) %></a>
 </span><% @bodies.each do |body| %><%= write_body body %><% if body['Picture'] %><a href="<%= origin_picture(body['Picture']) %>" target="_blank"><img src="<%= small_picture(body['Picture']) %>"></a><% end %><% end %></div><div id="jump_to_me">bottom</div>
 
 </body>
