@@ -8,7 +8,7 @@ class HomuBlockParser
   WEEK_DAY_FORMAT = /\((?<weekday>[一二三四五六日]{1})\)/
   TIME_FORMAT = /(?<time>\d{2}(:\d{2}){1,2}(\.\d{2,3}|))/
   DATETIME_FORMAT = /#{DATE_FORMAT}\s*#{WEEK_DAY_FORMAT}\s*#{TIME_FORMAT}/
-  ID_FORMAT = /ID:(?<id>.{8})/
+  ID_FORMAT = /(ID:(?<id>.{8})|)/
   DETAIL_FORMAT = /#{DATETIME_FORMAT}\s*#{ID_FORMAT}/
   NUMBER_FORMAT = /No\.(?<no>\d+)/
   HIDEN_BODY_FORMAT = /有回應\s(?<counts>\d+)\s篇被省略。(要閱讀所有回應請按下回應連結。|)/
