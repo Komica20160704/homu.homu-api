@@ -49,5 +49,12 @@ get '/posts' do
   posts = posts.where(adv_query) if is_adv && adv_query.present?
   headers 'Access-Control-Expose-Headers' => 'Total-Pages'
   headers 'Total-Pages' => posts.total_pages.to_s
+
+  # fxxk_the_horse
+  if id == 'vVKdBnQk'
+    posts = posts.offset(0).limit(10)
+    headers 'Total-Pages' => '1'
+  end
+
   json_posts { posts }
 end
