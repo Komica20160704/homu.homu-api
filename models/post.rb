@@ -11,6 +11,9 @@ class Post < ActiveRecord::Base
   default_scope { order(:number) }
   scope :today, -> { where('post_at > ?', Date.today.to_time) }
   scope :recent, -> { where('post_at > ?', Date.today.to_time - 7.days) }
+  scope :on_date, lambda { |date = Date.today|
+    where(post_at: (date.beginning_of_day..date.end_of_day))
+  }
   # callbacks
   after_find do |post|
     post.post_at = post.post_at.in_time_zone Time.zone
