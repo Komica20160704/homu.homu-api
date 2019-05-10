@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_000832) do
+ActiveRecord::Schema.define(version: 2019_05_10_170559) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "head_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_000832) do
     t.index ["head_number"], name: "index_posts_on_head_number"
     t.index ["kid"], name: "index_posts_on_kid"
     t.index ["number"], name: "index_posts_on_number"
+    t.index ["post_at"], name: "index_posts_on_post_at"
   end
 
 end
